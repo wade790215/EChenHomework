@@ -17,7 +17,7 @@ public abstract class GunWeaponBase : WeaponBase
         gunState = GunWeaponState.Reloading;
         if (WeaponData.currentBulletCount == WeaponData.maxBulletCount)
         {
-            Debug.Log($"Magazine is full.");
+            Debug.Log($"{WeaponData.weaponName} + Magazine is full.");
             gunState = GunWeaponState.CanShoot;
             return;
         }
@@ -32,12 +32,12 @@ public abstract class GunWeaponBase : WeaponBase
         if (!AllowAttack()) return;
         if (WeaponData.currentBulletCount > 0 && gunState == GunWeaponState.CanShoot)
         {
-            Debug.Log($"Attack");
+            Debug.Log($"{WeaponData.weaponName} + Attack");
             WeaponData.currentBulletCount--;
         }
         else
         {
-            Debug.Log($"NeedReload");
+            Debug.Log($"{WeaponData.weaponName} + NeedReload");
         }
 
         WeaponData.lastAttackTime = Time.time;

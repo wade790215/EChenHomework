@@ -4,14 +4,19 @@ using UnityEngine;
 
 public abstract class GunWeaponBase : WeaponBase
 {
-    public GameObject weaponModel;
-    public GunWeaponBase(ShottingMode shottingMode)
+    public GameObject weaponModel;    
+    public bool isReloading;
+
+    public GunWeaponBase(ShottingMode shottingMode,WeaponData weaponData)
     {
         gunShottingMode = shottingMode;
+        WeaponData = weaponData;    
     }
-
+    
     public ShottingMode gunShottingMode;
     public GunWeaponState gunState = GunWeaponState.CanShoot;
+    private ShottingMode shottingMode;
+
     public void Reload()
     {
         gunState = GunWeaponState.Reloading;
@@ -27,6 +32,11 @@ public abstract class GunWeaponBase : WeaponBase
         Debug.Log($"{WeaponData.weaponName} + Reloaded");
     }
 
+    public override void Attack(CharacterBase character)
+    {
+        
+    }
+
     public override void Attack()
     {
         if (!AllowAttack()) return;
@@ -39,15 +49,20 @@ public abstract class GunWeaponBase : WeaponBase
         {
             Debug.Log($"{WeaponData.weaponName} + NeedReload");
         }
+        lastAttackTime = Time.time;
 
-        WeaponData.lastAttackTime = Time.time;
+        WeaponAttack();
+    }
+
+    public virtual void WeaponAttack()
+    {
+        //TODO 子彈攻擊範圍寫在這裡設定
     }
 }
 
 public enum ShottingMode
 {
-    SingleShot,
-    TripleShot,
+    SingleShot,    
     Auto
 }
 

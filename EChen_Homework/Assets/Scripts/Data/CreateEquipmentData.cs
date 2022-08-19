@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EquipmentData", menuName = "CreateModelData/CreateEquipmentData")]
 public class CreateEquipmentData : ScriptableObject
 {
-    public List<EquipmentData> EquipmentData = new List<EquipmentData>();
+    public EquipmentData EquipmentData;
 }
 
 [Serializable]

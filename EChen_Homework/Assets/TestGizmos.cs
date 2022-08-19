@@ -1,12 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TestGizmos : MonoBehaviour
 {
     public Vector3 Distance;
-    
-    // Start is called before the first frame update
+    public Vector3 direction;
+    public Vector3 spread;
+    public float range = 10f;
+    public Transform traget;
+    public Vector2 v2;
+
     void Start()
     {
         
@@ -14,24 +19,47 @@ public class TestGizmos : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        
+    {         
+        //Debug.Log(Vector3.Angle(transform.forward, traget.position));
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                direction = transform.forward;
+                spread = Vector3.zero;
+                spread += transform.up * UnityEngine.Random.Range(-1f, 1f);
+                spread += transform.right * UnityEngine.Random.Range(-1f, 1f);
+                direction += spread.normalized * UnityEngine.Random.Range(0f, 0.2f);
+                var angle = Vector3.Angle(transform.forward, direction);
+                v2 = new Vector2((float)Math.Cos(angle * Math.PI / 180), (float)Math.Sin(angle * Math.PI / 180));               
+                if (Physics.Raycast(transform.position, direction, out RaycastHit hit, range))
+                {
+                    Debug.DrawLine(transform.position, hit.point, Color.green, 1f);
+                }
+                else
+                {
+                    Debug.DrawLine(transform.position, transform.position + direction * range, Color.red, 1f);
+                }
+            }
+
+        }
     }
 
     void OnDrawGizmos()
-    {
-        GizmosTools.DrawWireSemicircle(this.transform.position, this.transform.forward, 2, 0);        
-        
-        for (int i = 1; i < 50; i++)
-        {
-            Gizmos.color = Color.yellow;
-            var offset = new Vector3(0,i, 0);
-            Gizmos.DrawSphere(transform.position + Distance + offset, 0.5f);
-        }
+    {       
+        GizmosTools.DrawWireSemicircle(transform.position,transform.forward, 0.5f, 30, Vector3.up);
+        //GizmosTools.DrawWireSemicircle(this.transform.position, this.transform.forward, 2, 0);        
+
+        //for (int i = 1; i < 50; i++)
+        //{
+        //    Gizmos.color = Color.yellow;
+        //    var offset = new Vector3(0,i, 0);
+        //    Gizmos.DrawSphere(transform.position + Distance + offset, 0.5f);
+        //}
     }
 }
 public static class GizmosTools
-{    
+{
     public static void DrawWireSemicircle(Vector3 origin, Vector3 direction, float radius, int angle)
     {
         DrawWireSemicircle(origin, direction, radius, angle, Vector3.up);

@@ -11,11 +11,6 @@ public class Sword : MeleeWeaponBase
 
     public override void Attack()
     {
-        throw new System.NotImplementedException();
-    }
-
-    public override void SetModel(GameObject weaponModel)
-    {
         
     }
 }

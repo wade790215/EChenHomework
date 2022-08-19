@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CharacterData", menuName = "CreateModelData/CreateCharacterData")]
 public class CreateCharacterData : ScriptableObject
 {
-    public List<CharacterData> characterData = new List<CharacterData>();
+    public CharacterData characterData;
 }
 
 [Serializable]

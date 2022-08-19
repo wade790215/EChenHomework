@@ -4,17 +4,17 @@ using UnityEngine;
 
 public abstract class WeaponBase
 {
-    public WeaponData WeaponData; 
+    public float lastAttackTime = 0f;
+    public WeaponData WeaponData;
     public abstract void Attack(CharacterBase character);
-    public abstract void Attack();
-    public abstract void SetModel(GameObject weaponModel);
+    public abstract void Attack();    
     public virtual void ShowAttackEffect(Vector3 hitPoint,float displayTime)
     {
 
     }
     public bool AllowAttack()
     {
-        return Time.time - WeaponData.lastAttackTime > 1 / WeaponData.attackRate;
+        return Time.time - lastAttackTime > 1 / WeaponData.attackRate;
     }
 }
 

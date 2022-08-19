@@ -4,17 +4,7 @@ using UnityEngine;
 
 public class MachineGun : GunWeaponBase
 {
-    public MachineGun(ShottingMode shottingMode) : base(shottingMode)
+    public MachineGun(ShottingMode shottingMode, WeaponData weaponData) : base(shottingMode, weaponData)
     {
-    }
-
-    public override void Attack(CharacterBase character)
-    {
-
-    }   
-
-    public override void SetModel(GameObject weaponModel)
-    {
-
-    }
+    } 
 }

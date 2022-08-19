@@ -5,17 +5,12 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 public class Pistol : GunWeaponBase
 {
-    public Pistol(ShottingMode shottingMode) : base(shottingMode)
+    public Pistol(ShottingMode shottingMode, WeaponData weaponData) : base(shottingMode, weaponData)
     {
     }
 
     public override void Attack(CharacterBase character)
     {
-
+       
     }
-
-    public override void SetModel(GameObject weaponModel)
-    {
-
-    }   
 }

@@ -14,7 +14,8 @@ public enum GunWeapon
 public class WeaponController : ControllerBase
 {
     public GunWeaponBase gun = null;
-    public CreateWeaponData weaponData;  
+    public CreateWeaponData weaponData;
+    public Transform firePoint;
     public ShottingMode shottingMode;
     public GunWeapon getWeapon;
 

@@ -11,15 +11,16 @@ public class TestGizmos : MonoBehaviour
     public float range = 10f;
     public Transform traget;
     public Vector2 v2;
-
+    public float maxAngle, minAngle;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
-    {         
+    {
+        Debug.Log(Vector3.Angle(transform.forward, traget.localPosition));
         //Debug.Log(Vector3.Angle(transform.forward, traget.position));
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -27,11 +28,13 @@ public class TestGizmos : MonoBehaviour
             {
                 direction = transform.forward;
                 spread = Vector3.zero;
-                spread += transform.up * UnityEngine.Random.Range(-1f, 1f);
-                spread += transform.right * UnityEngine.Random.Range(-1f, 1f);
-                direction += spread.normalized * UnityEngine.Random.Range(0f, 0.2f);
+                spread += transform.up * UnityEngine.Random.Range(minAngle, maxAngle);
+                spread += transform.right * UnityEngine.Random.Range(minAngle, maxAngle);
+                direction += spread.normalized * UnityEngine.Random.Range(0, maxAngle);
                 var angle = Vector3.Angle(transform.forward, direction);
-                v2 = new Vector2((float)Math.Cos(angle * Math.PI / 180), (float)Math.Sin(angle * Math.PI / 180));               
+                v2 = new Vector2((float)Math.Cos(angle * Math.PI / 180), (float)Math.Sin(angle * Math.PI / 180));
+                Debug.Log(v2);
+                Debug.Log(angle);
                 if (Physics.Raycast(transform.position, direction, out RaycastHit hit, range))
                 {
                     Debug.DrawLine(transform.position, hit.point, Color.green, 1f);
@@ -46,8 +49,13 @@ public class TestGizmos : MonoBehaviour
     }
 
     void OnDrawGizmos()
-    {       
-        GizmosTools.DrawWireSemicircle(transform.position,transform.forward, 0.5f, 30, Vector3.up);
+    {
+
+        GizmosTools.DrawWireSemicircle(transform.position , transform.forward * range, 1f, 45, Vector3.up);
+        GizmosTools.DrawWireSemicircle(transform.position , transform.forward * range, 1f, 45, Vector3.right);
+
+
+
         //GizmosTools.DrawWireSemicircle(this.transform.position, this.transform.forward, 2, 0);        
 
         //for (int i = 1; i < 50; i++)

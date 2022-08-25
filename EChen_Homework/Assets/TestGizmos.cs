@@ -10,8 +10,9 @@ public class TestGizmos : MonoBehaviour
     public Vector3 spread;
     public float range = 10f;
     public Transform traget;
-    public Vector2 v2;
+    
     public float maxAngle, minAngle;
+  
     void Start()
     {
 
@@ -20,21 +21,18 @@ public class TestGizmos : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Vector3.Angle(transform.forward, traget.localPosition));
-        //Debug.Log(Vector3.Angle(transform.forward, traget.position));
+       
         if (Input.GetKeyDown(KeyCode.P))
         {
             for (int i = 0; i < 8; i++)
             {
                 direction = transform.forward;
                 spread = Vector3.zero;
-                spread += transform.up * UnityEngine.Random.Range(minAngle, maxAngle);
-                spread += transform.right * UnityEngine.Random.Range(minAngle, maxAngle);
+                spread += transform.up * UnityEngine.Random.Range(minAngle, maxAngle);                
+                spread += transform.right * UnityEngine.Random.Range(minAngle, maxAngle);                
+                
                 direction += spread.normalized * UnityEngine.Random.Range(0, maxAngle);
-                var angle = Vector3.Angle(transform.forward, direction);
-                v2 = new Vector2((float)Math.Cos(angle * Math.PI / 180), (float)Math.Sin(angle * Math.PI / 180));
-                Debug.Log(v2);
-                Debug.Log(angle);
+                
                 if (Physics.Raycast(transform.position, direction, out RaycastHit hit, range))
                 {
                     Debug.DrawLine(transform.position, hit.point, Color.green, 1f);
@@ -60,7 +58,7 @@ public class TestGizmos : MonoBehaviour
 
         //for (int i = 1; i < 50; i++)
         //{
-        //    Gizmos.color = Color.yellow;
+        //    Gizmos.color = Color.yellow;  
         //    var offset = new Vector3(0,i, 0);
         //    Gizmos.DrawSphere(transform.position + Distance + offset, 0.5f);
         //}

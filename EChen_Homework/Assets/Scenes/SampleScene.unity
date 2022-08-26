@@ -159,10 +159,8 @@ MonoBehaviour:
   spread: {x: 0, y: 0, z: 0}
   range: 10
   traget: {fileID: 0}
-  v2: {x: 0, y: 0}
   maxAngle: 0
   minAngle: 0
-  test: 0
 --- !u!81 &1393602054
 AudioListener:
   m_ObjectHideFlags: 0
@@ -317,7 +315,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1449675936}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.9}
+  m_LocalPosition: {x: 0, y: 0, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -360,10 +358,8 @@ MonoBehaviour:
   spread: {x: 0, y: 0, z: 0}
   range: 10
   traget: {fileID: 1449675940}
-  v2: {x: 0, y: 0}
   maxAngle: 0
   minAngle: 0
-  test: 0
 --- !u!65 &1467483568
 BoxCollider:
   m_ObjectHideFlags: 0

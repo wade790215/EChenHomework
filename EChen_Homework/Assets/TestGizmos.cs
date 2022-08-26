@@ -12,26 +12,31 @@ public class TestGizmos : MonoBehaviour
     public Transform traget;
     
     public float maxAngle, minAngle;
-  
+    public float degrees;
+
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+        var costheta = Mathf.Cos(degrees * Mathf.PI / 180);
+        var r = Vector3.forward / costheta;
+        var result = Mathf.Sin(degrees * Mathf.PI / 180) * r;
+        Debug.Log(result);
+        
         if (Input.GetKeyDown(KeyCode.P))
         {
             for (int i = 0; i < 8; i++)
             {
                 direction = transform.forward;
                 spread = Vector3.zero;
-                spread += transform.up * UnityEngine.Random.Range(minAngle, maxAngle);                
-                spread += transform.right * UnityEngine.Random.Range(minAngle, maxAngle);                
+                //spread += transform.up * UnityEngine.Random.Range(minAngle, maxAngle);                
+                //spread += transform.right * UnityEngine.Random.Range(minAngle, maxAngle);
                 
-                direction += spread.normalized * UnityEngine.Random.Range(0, maxAngle);
+                //direction += spread.normalized * UnityEngine.Random.Range(0, maxAngle);
                 
                 if (Physics.Raycast(transform.position, direction, out RaycastHit hit, range))
                 {

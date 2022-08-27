@@ -16,8 +16,14 @@ MonoBehaviour:
   - model: {fileID: 0}
     weaponName: 0
     owner: 
-    attack: 30
+    damage: 16
     durability: 10
     attackRate: 0.75
+    scatterCount: 1
     currentBulletCount: 6
     maxBulletCount: 6
+    verticalMaxAngle: 0
+    verticalMinAngle: 0
+    horiziontalMaxAngle: 0
+    horiziontalMinAngle: 0
+    shootingDistance: 15

@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: e57c428a3a386b84f9562998eb71a68d, type: 2}
+  firePoint: {fileID: 4154775374565612745}
   shottingMode: 0
   getWeapon: 0
 --- !u!1001 &8793223166993179095

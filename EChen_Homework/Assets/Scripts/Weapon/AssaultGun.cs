@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AssaultGun : GunWeaponBase
 {
-    public AssaultGun(ShottingMode shottingMode, WeaponData weaponData) : base(shottingMode, weaponData)
+    public AssaultGun(ShottingMode shottingMode, WeaponData weaponData, Transform firePoint) : base(shottingMode, weaponData, firePoint)
     {
     }   
 }

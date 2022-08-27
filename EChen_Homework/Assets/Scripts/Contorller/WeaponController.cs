@@ -45,16 +45,18 @@ public class WeaponController : ControllerBase
         switch (getWeapon)
         {
             case GunWeapon.Pistol:
-                gun = new Pistol(shottingMode, GetWeaponData(weaponData.WeaponData));
+                gun = new Pistol(shottingMode, GetWeaponData(weaponData.WeaponData), firePoint);         
+
                 break;
-            case GunWeapon.MachineGun:
-                gun = new MachineGun(shottingMode, GetWeaponData(weaponData.WeaponData));
+            case GunWeapon.MachineGun:  
+
+                gun = new MachineGun(shottingMode, GetWeaponData(weaponData.WeaponData), firePoint);
                 break;
             case GunWeapon.ShotGun:
-                gun = new ShotGun(shottingMode, GetWeaponData(weaponData.WeaponData));
+                gun = new ShotGun(shottingMode, GetWeaponData(weaponData.WeaponData), firePoint);
                 break;
             case GunWeapon.AssaultGun:
-                gun = new AssaultGun(shottingMode, GetWeaponData(weaponData.WeaponData));
+                gun = new AssaultGun(shottingMode, GetWeaponData(weaponData.WeaponData), firePoint);
                 break;
         }
     }

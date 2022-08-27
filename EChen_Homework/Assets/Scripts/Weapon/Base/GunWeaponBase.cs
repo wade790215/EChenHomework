@@ -4,13 +4,15 @@ using UnityEngine;
 
 public abstract class GunWeaponBase : WeaponBase
 {
-    public GameObject weaponModel;    
+    public GameObject weaponModel;
+    public Transform firePoint;
     public bool isReloading;
 
-    public GunWeaponBase(ShottingMode shottingMode,WeaponData weaponData)
+    public GunWeaponBase(ShottingMode shottingMode,WeaponData weaponData,Transform firePoint)
     {
         gunShottingMode = shottingMode;
-        WeaponData = weaponData;    
+        WeaponData = weaponData;
+        this.firePoint = firePoint;
     }
     
     public ShottingMode gunShottingMode;
@@ -44,19 +46,39 @@ public abstract class GunWeaponBase : WeaponBase
         {
             Debug.Log($"{WeaponData.weaponName} + Attack");
             WeaponData.currentBulletCount--;
+            DrawAttackRay();
         }
         else
         {
             Debug.Log($"{WeaponData.weaponName} + NeedReload");
         }
-        lastAttackTime = Time.time;
-
-        WeaponAttack();
+        lastAttackTime = Time.time;        
     }
 
-    public virtual void WeaponAttack()
+    public virtual void DrawAttackRay()
     {
-        //TODO 子彈攻擊範圍寫在這裡設定
+        for (int i = 0; i < WeaponData.scatterCount; i++)
+        {
+            var direction = firePoint.forward;
+            var spread = Vector3.zero;
+            var vMax = Tool.Angle2Value(Vector3.up, WeaponData.verticalMaxAngle);
+            var vMin = Tool.Angle2Value(Vector3.up, WeaponData.verticalMinAngle);
+            var hMax = Tool.Angle2Value(Vector3.right, WeaponData.horiziontalMaxAngle);
+            var hMin = Tool.Angle2Value(Vector3.right, WeaponData.horiziontalMinAngle);
+
+            spread += firePoint.up * Random.Range(vMin, vMax);
+            spread += firePoint.right * Random.Range(hMin, hMax);
+            direction += spread;
+
+            if (Physics.Raycast(firePoint.position, direction, out RaycastHit hit, WeaponData.shootingDistance))
+            {
+                Debug.DrawLine(firePoint.position, hit.point, Color.green, 5f);
+            }
+            else
+            {
+                Debug.DrawLine(firePoint.position, firePoint.position + direction * WeaponData.shootingDistance, Color.red, 5f);
+            }
+        }        
     }
 }
 

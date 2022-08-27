@@ -159,8 +159,14 @@ MonoBehaviour:
   spread: {x: 0, y: 0, z: 0}
   range: 10
   traget: {fileID: 0}
-  maxAngle: 0
-  minAngle: 0
+  verticalMaxAngle: 0
+  verticalMinAngle: 0
+  horiziontalMaxAngle: 0
+  horiziontalMinAngle: 0
+  vMax: 0
+  vMin: 0
+  hMax: 0
+  hMin: 0
 --- !u!81 &1393602054
 AudioListener:
   m_ObjectHideFlags: 0
@@ -358,8 +364,14 @@ MonoBehaviour:
   spread: {x: 0, y: 0, z: 0}
   range: 10
   traget: {fileID: 1449675940}
-  maxAngle: 0
-  minAngle: 0
+  verticalMaxAngle: 0
+  verticalMinAngle: 0
+  horiziontalMaxAngle: 0
+  horiziontalMinAngle: 0
+  vMax: 0
+  vMin: 0
+  hMax: 0
+  hMin: 0
 --- !u!65 &1467483568
 BoxCollider:
   m_ObjectHideFlags: 0

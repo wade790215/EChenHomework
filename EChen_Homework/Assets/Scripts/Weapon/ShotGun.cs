@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class ShotGun : GunWeaponBase
 {
-    public ShotGun(ShottingMode shottingMode, WeaponData weaponData) : base(shottingMode, weaponData)
+    public ShotGun(ShottingMode shottingMode, WeaponData weaponData, Transform firePoint) : base(shottingMode, weaponData, firePoint)
     {
-    }
-
-    public override void WeaponAttack()
-    {
-        Debug.Log("Attack");
-    }  
+    }       
 }

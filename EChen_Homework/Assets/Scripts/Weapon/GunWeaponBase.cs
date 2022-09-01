@@ -2,35 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class GunWeaponBase : WeaponBase
+public enum ShottingMode
 {
-    public GameObject weaponModel;
-    public Transform firePoint;
-    public bool isReloading;
+    SingleShot,
+    Auto
+}
 
-    public GunWeaponBase(ShottingMode shottingMode,WeaponData weaponData,Transform firePoint)
-    {
-        gunShottingMode = shottingMode;
+public class GunWeaponBase : WeaponBase
+{
+  
+    public ShottingMode shottingMode;
+    public WeaponData WeaponData;    
+    public Transform firePoint;   
+    public float lastAttackTime = 0f;
+
+    public GunWeaponBase(WeaponData weaponData,Transform firePoint, ShottingMode shottingMode)
+    {        
         WeaponData = weaponData;
         this.firePoint = firePoint;
-    }
-    
-    public ShottingMode gunShottingMode;
-    public GunWeaponState gunState = GunWeaponState.CanShoot;
-    private ShottingMode shottingMode;
+        this.shottingMode = shottingMode;
+    }      
 
     public void Reload()
-    {
-        gunState = GunWeaponState.Reloading;
+    {       
         if (WeaponData.currentBulletCount == WeaponData.maxBulletCount)
         {
-            Debug.Log($"{WeaponData.weaponName} + Magazine is full.");
-            gunState = GunWeaponState.CanShoot;
+            Debug.Log($"{WeaponData.weaponName} + Magazine is full.");            
             return;
         }
 
-        WeaponData.currentBulletCount = WeaponData.maxBulletCount;
-        gunState = GunWeaponState.CanShoot;
+        WeaponData.currentBulletCount = WeaponData.maxBulletCount;        
         Debug.Log($"{WeaponData.weaponName} + Reloaded");
     }
 
@@ -42,7 +43,7 @@ public abstract class GunWeaponBase : WeaponBase
     public override void Attack()
     {
         if (!AllowAttack()) return;
-        if (WeaponData.currentBulletCount > 0 && gunState == GunWeaponState.CanShoot)
+        if (WeaponData.currentBulletCount > 0 )
         {
             Debug.Log($"{WeaponData.weaponName} + Attack");
             WeaponData.currentBulletCount--;
@@ -55,7 +56,12 @@ public abstract class GunWeaponBase : WeaponBase
         lastAttackTime = Time.time;        
     }
 
-    public virtual void DrawAttackRay()
+    public bool AllowAttack()
+    {
+        return Time.time - lastAttackTime > 1 / WeaponData.attackRate;
+    }
+
+    public void DrawAttackRay()
     {
         for (int i = 0; i < WeaponData.scatterCount; i++)
         {
@@ -82,15 +88,6 @@ public abstract class GunWeaponBase : WeaponBase
     }
 }
 
-public enum ShottingMode
-{
-    SingleShot,    
-    Auto
-}
 
-public enum GunWeaponState
-{
-    CanShoot,
-    Locked,
-    Reloading
-}
+
+

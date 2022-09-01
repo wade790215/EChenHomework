@@ -11,27 +11,16 @@ public enum GunWeapon
     AssaultGun
 }
 
-public class WeaponController : ControllerBase
+public class WeaponController : MonoBehaviour
 {
     public GunWeaponBase gun = null;
     public CreateWeaponData weaponData;
-    public Transform firePoint;
-    public ShottingMode shottingMode;
-    public GunWeapon getWeapon;
-
-    public override void OnStart()
-    {
-        
-    }
-
-    public override void OnUpdate()
-    {
-        
-    }
+    public Transform firePoint;    
+    public GunWeapon weaponType;
 
     public void Start()
     {
-        GetWeapon(getWeapon);
+        GetWeapon(weaponType);
     }   
 
     public void Update()
@@ -45,30 +34,28 @@ public class WeaponController : ControllerBase
         switch (getWeapon)
         {
             case GunWeapon.Pistol:
-                gun = new Pistol(shottingMode, GetWeaponData(weaponData.WeaponData), firePoint);         
-
+                gun = new GunWeaponBase(GetWeaponData(weaponData.WeaponData), firePoint, ShottingMode.SingleShot); 
                 break;
-            case GunWeapon.MachineGun:  
-
-                gun = new MachineGun(shottingMode, GetWeaponData(weaponData.WeaponData), firePoint);
+            case GunWeapon.MachineGun:
+                gun = new GunWeaponBase(GetWeaponData(weaponData.WeaponData), firePoint, ShottingMode.Auto);
                 break;
             case GunWeapon.ShotGun:
-                gun = new ShotGun(shottingMode, GetWeaponData(weaponData.WeaponData), firePoint);
+                gun = new GunWeaponBase(GetWeaponData(weaponData.WeaponData), firePoint, ShottingMode.SingleShot);
                 break;
             case GunWeapon.AssaultGun:
-                gun = new AssaultGun(shottingMode, GetWeaponData(weaponData.WeaponData), firePoint);
+                gun = new GunWeaponBase(GetWeaponData(weaponData.WeaponData), firePoint, ShottingMode.Auto);
                 break;
         }
     }
 
     private WeaponData GetWeaponData(List<WeaponData> weaponData)
     {
-        return weaponData.Find((gun) => gun.weaponName == getWeapon);
+        return weaponData.Find((gun) => gun.weaponName == weaponType);
     }
 
     private void JudgementShottingMode()
     {
-        switch (gun.gunShottingMode)
+        switch (gun.shottingMode)
         {
             case ShottingMode.SingleShot:
                 if (Input.GetKeyDown(KeyCode.A))

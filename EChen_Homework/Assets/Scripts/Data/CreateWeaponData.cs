@@ -5,11 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "WeaponData", menuName = "CreateModelData/CreateWeaponData")]
 public class CreateWeaponData : ScriptableObject
 {
-    public List<WeaponData> WeaponData;   
+    public WeaponData WeaponData;   
 }
 
 [Serializable]
-public class WeaponData : DataBase
+public class WeaponData 
 {
     [Header("ªZ¾¹¦WºÙ")]
     public GunWeapon weaponName;

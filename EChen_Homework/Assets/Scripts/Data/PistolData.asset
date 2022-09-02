@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: PistolData
   m_EditorClassIdentifier: 
   WeaponData:
-  - model: {fileID: 0}
     weaponName: 0
     owner: 
-    damage: 16
-    durability: 10
+    damage: 10
+    durability: 0
     attackRate: 0.75
     scatterCount: 1
     currentBulletCount: 6
@@ -26,4 +25,4 @@ MonoBehaviour:
     verticalMinAngle: 0
     horiziontalMaxAngle: 0
     horiziontalMinAngle: 0
-    shootingDistance: 15
+    shootingDistance: 10

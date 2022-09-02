@@ -9,8 +9,7 @@ public enum ShottingMode
 }
 
 public class GunWeaponBase : WeaponBase
-{
-  
+{  
     public ShottingMode shottingMode;
     public WeaponData WeaponData;    
     public Transform firePoint;   

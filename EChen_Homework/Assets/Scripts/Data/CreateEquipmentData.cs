@@ -10,7 +10,7 @@ public class CreateEquipmentData : ScriptableObject
 }
 
 [Serializable]
-public class EquipmentData : DataBase
+public class EquipmentData 
 {
     public string equipmentName;
     public string owner;

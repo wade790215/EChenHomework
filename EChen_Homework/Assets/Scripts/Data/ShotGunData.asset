@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: ShotGunData
   m_EditorClassIdentifier: 
   WeaponData:
-  - model: {fileID: 0}
-    weaponName: 2
+    weaponName: 0
     owner: 
-    damage: 3
-    durability: 10
+    damage: 4
+    durability: 0
     attackRate: 1
     scatterCount: 8
     currentBulletCount: 12
@@ -26,4 +25,4 @@ MonoBehaviour:
     verticalMinAngle: -10
     horiziontalMaxAngle: 10
     horiziontalMinAngle: -10
-    shootingDistance: 8
+    shootingDistance: 5

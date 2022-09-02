@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: AssaultData
   m_EditorClassIdentifier: 
   WeaponData:
-  - model: {fileID: 0}
-    weaponName: 3
+    weaponName: 0
     owner: 
-    damage: 6
-    durability: 10
-    attackRate: 6
+    damage: 2
+    durability: 0
+    attackRate: 4
     scatterCount: 1
     currentBulletCount: 30
     maxBulletCount: 30

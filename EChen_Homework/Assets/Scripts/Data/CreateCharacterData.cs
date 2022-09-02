@@ -10,7 +10,7 @@ public class CreateCharacterData : ScriptableObject
 }
 
 [Serializable]
-public class CharacterData : DataBase
+public class CharacterData 
 {
     public string characterName;
     public float health;

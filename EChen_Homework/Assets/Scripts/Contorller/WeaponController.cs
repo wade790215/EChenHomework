@@ -15,11 +15,13 @@ public class WeaponController : MonoBehaviour
 {
     public GunWeaponBase gun = null;
     public CreateWeaponData weaponData;
-    public Transform firePoint;    
+    public Transform firePoint;
+    private InputModule inputModule;
     public GunWeapon weaponType;
 
     public void Start()
     {
+        SetInputModule(new KeyboardInput());
         GetWeapon(weaponType);
     }   
 
@@ -27,6 +29,11 @@ public class WeaponController : MonoBehaviour
     {
         JudgementShottingMode();
         Reload();
+    }
+
+    public void SetInputModule(InputModule inputModule)
+    {
+        this.inputModule = inputModule; 
     }
 
     private void GetWeapon(GunWeapon getWeapon)
@@ -53,6 +60,10 @@ public class WeaponController : MonoBehaviour
         switch (gun.shottingMode)
         {
             case ShottingMode.SingleShot:
+                //if (inputModule.PressDown(KeyCode.T))
+                //{
+
+                //}
                 if (Input.GetKeyDown(KeyCode.A))
                 {
                     gun.Attack();
@@ -60,6 +71,10 @@ public class WeaponController : MonoBehaviour
                 break;
 
             case ShottingMode.Auto:
+                //if (inputModule.PressAndHold())
+                //{
+
+                //}
                 if (Input.GetKey(KeyCode.Space))
                 {
                     gun.Attack();

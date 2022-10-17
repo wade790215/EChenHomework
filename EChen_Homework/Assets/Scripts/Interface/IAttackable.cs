@@ -5,7 +5,7 @@ using UnityEngine;
 public interface IAttackable
 {   
     public void Attack(IAttackable attakcer);
-    public void SetWeapon(WeaponBase weapon);   
+    public void SetWeapon(GunWeaponBase weapon);   
 }
    
 

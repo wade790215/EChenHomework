@@ -10,7 +10,7 @@ public class Player : CharacterBase,IAttackable
         
     }
 
-    public void SetWeapon(WeaponBase weapon)
+    public void SetWeapon(GunWeaponBase weapon)
     {
        
     }

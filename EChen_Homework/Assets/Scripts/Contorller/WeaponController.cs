@@ -13,27 +13,22 @@ public enum GunWeapon
 
 public class WeaponController : MonoBehaviour
 {
-    public GunWeaponBase gun = null;
+    public GunWeaponBase gun;
     public CreateWeaponData weaponData;
-    public Transform firePoint;
-    private InputModule inputModule;
-    public GunWeapon weaponType;
-
-    public void Start()
+    public Transform firePoint;  
+    public GunWeapon weaponType; 
+    
+    private AttackModule attackModule;
+    
+    private void Start()
     {
-        SetInputModule(new KeyboardInput());
         GetWeapon(weaponType);
-    }   
-
-    public void Update()
-    {
-        JudgementShottingMode();
-        Reload();
     }
 
-    public void SetInputModule(InputModule inputModule)
+    private void Update()
     {
-        this.inputModule = inputModule; 
+        JudgementShottingMode();
+        Reload();      
     }
 
     private void GetWeapon(GunWeapon getWeapon)
@@ -41,16 +36,24 @@ public class WeaponController : MonoBehaviour
         switch (getWeapon)
         {
             case GunWeapon.Pistol:
-                gun = new GunWeaponBase(weaponData.WeaponData, firePoint, ShottingMode.SingleShot); 
+                gun = new GunWeaponBase(ShottingMode.SingleShot);
+                attackModule = new AttackModule(weaponData.WeaponData, firePoint);
+                gun.SetAttackModule(attackModule);
                 break;
             case GunWeapon.MachineGun:
-                gun = new GunWeaponBase(weaponData.WeaponData, firePoint, ShottingMode.Auto);
+                gun = new GunWeaponBase(ShottingMode.Auto);
+                attackModule = new AttackModule(weaponData.WeaponData, firePoint);
+                gun.SetAttackModule(attackModule);
                 break;
             case GunWeapon.ShotGun:
-                gun = new GunWeaponBase(weaponData.WeaponData, firePoint, ShottingMode.SingleShot);
+                gun = new GunWeaponBase(ShottingMode.SingleShot);
+                attackModule = new AttackModule(weaponData.WeaponData, firePoint);
+                gun.SetAttackModule(attackModule);
                 break;
             case GunWeapon.AssaultGun:
-                gun = new GunWeaponBase(weaponData.WeaponData, firePoint, ShottingMode.Auto);
+                gun = new GunWeaponBase(ShottingMode.Auto);
+                attackModule = new AttackModule(weaponData.WeaponData, firePoint);
+                gun.SetAttackModule(attackModule);
                 break;
         }
     }
@@ -60,24 +63,18 @@ public class WeaponController : MonoBehaviour
         switch (gun.shottingMode)
         {
             case ShottingMode.SingleShot:
-                //if (inputModule.PressDown(KeyCode.T))
-                //{
-
-                //}
+                
                 if (Input.GetKeyDown(KeyCode.A))
                 {
-                    gun.Attack();
+                    gun.attackModule.Attack();
                 }
                 break;
 
             case ShottingMode.Auto:
-                //if (inputModule.PressAndHold())
-                //{
-
-                //}
+               
                 if (Input.GetKey(KeyCode.Space))
                 {
-                    gun.Attack();
+                    gun.attackModule.Attack();
                 }
                 break;
         }
@@ -87,7 +84,8 @@ public class WeaponController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            gun.Reload();
+            gun.attackModule.Reload();
         }
-    }   
+    }
+   
 }

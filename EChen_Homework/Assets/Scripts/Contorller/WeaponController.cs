@@ -13,17 +13,25 @@ public enum GunWeapon
 
 public class WeaponController : MonoBehaviour
 {
+    public GunWeapon weaponType;
     public GunWeaponBase gun;
     public CreateWeaponData weaponData;
     public Transform firePoint;  
-    public GunWeapon weaponType; 
-    
+    private ModuleController moduleController;
     private AttackModule attackModule;
-    
+    private ReloadModule reloadModule;
+    private SphereAttack sphereAtk;
+    private RayAttack rayAtk;
+    private FullReload fullReload;
+    private EnergyFilingReload energyReload;
+    private List<IGetWeaponData> weaponDataList = new List<IGetWeaponData>();   
+
     private void Start()
-    {      
+    {
+        CreateModule();
+        CreateSkill();        
         GetWeapon(weaponType);
-    }
+    }  
 
     private void Update()
     {
@@ -31,36 +39,70 @@ public class WeaponController : MonoBehaviour
         Reload();      
     }
 
+    private void CreateModule()
+    {
+        moduleController = new ModuleController();
+        attackModule = new AttackModule(firePoint);
+        reloadModule = new ReloadModule();
+       
+        moduleController.AddModule(attackModule.GetHashCode(), attackModule);
+        moduleController.AddModule(reloadModule.GetHashCode(), reloadModule);
+        moduleController.SetUpModulesData(weaponData.WeaponData);
+    }
+
+    private void CreateSkill()
+    {
+        sphereAtk = new SphereAttack(firePoint);
+        rayAtk = new RayAttack(firePoint);
+
+        fullReload = new FullReload();
+        energyReload = new EnergyFilingReload();
+
+        weaponDataList.Add(sphereAtk);
+        weaponDataList.Add(rayAtk);
+        weaponDataList.Add(fullReload);
+        weaponDataList.Add(energyReload);
+
+        foreach (var dataList in weaponDataList)
+        {
+            dataList.SetWeaponData(weaponData.WeaponData);
+        }
+    }
+
     private void GetWeapon(GunWeapon getWeapon)
     {       
         switch (getWeapon)
         {
             case GunWeapon.Pistol:
-                gun = new GunWeaponBase(ShottingMode.SingleShot);
-                attackModule = new AttackModule(weaponData.WeaponData, firePoint);
-                attackModule.SetAttack(new SphereAttack(weaponData.WeaponData, firePoint));
+                gun = new GunWeaponBase(ShottingMode.SingleShot);                
+                attackModule.SetAttack(rayAtk);
+                reloadModule.SetReload(fullReload);
                 gun.SetAttackModule(attackModule);
+                gun.SetReloadModule(reloadModule);
                 break;
 
             case GunWeapon.MachineGun:
-                gun = new GunWeaponBase(ShottingMode.Auto);
-                attackModule = new AttackModule(weaponData.WeaponData, firePoint);
-                attackModule.SetAttack(new RayAttack(weaponData.WeaponData, firePoint));
+                gun = new GunWeaponBase(ShottingMode.Auto);               
+                attackModule.SetAttack(rayAtk);
+                reloadModule.SetReload(fullReload);
                 gun.SetAttackModule(attackModule);
+                gun.SetReloadModule(reloadModule);
                 break;
 
             case GunWeapon.ShotGun:
-                gun = new GunWeaponBase(ShottingMode.SingleShot);
-                attackModule = new AttackModule(weaponData.WeaponData, firePoint);
-                attackModule.SetAttack(new RayAttack(weaponData.WeaponData, firePoint));
+                gun = new GunWeaponBase(ShottingMode.SingleShot);               
+                attackModule.SetAttack(sphereAtk);
+                reloadModule.SetReload(fullReload);
                 gun.SetAttackModule(attackModule);
+                gun.SetReloadModule(reloadModule);
                 break;
 
             case GunWeapon.AssaultGun:
-                gun = new GunWeaponBase(ShottingMode.Auto);
-                attackModule = new AttackModule(weaponData.WeaponData, firePoint);
-                attackModule.SetAttack(new RayAttack(weaponData.WeaponData, firePoint));
+                gun = new GunWeaponBase(ShottingMode.Auto);               
+                attackModule.SetAttack(rayAtk);
+                reloadModule.SetReload(energyReload);
                 gun.SetAttackModule(attackModule);
+                gun.SetReloadModule(reloadModule);
                 break;
         }
     }
@@ -91,7 +133,7 @@ public class WeaponController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            gun.attackModule.Reload();
+            gun.reloadModule.Reload();
         }
     }
    

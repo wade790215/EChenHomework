@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: ShotGunData
   m_EditorClassIdentifier: 
   WeaponData:
-    weaponName: 0
+    weaponName: 2
     owner: 
     damage: 4
     durability: 0
     attackRate: 1
     scatterCount: 8
-    currentBulletCount: 12
+    currentBulletCount: 11
     maxBulletCount: 12
+    currentEnergy: 0
+    maxEnergy: 0
     verticalMaxAngle: 10
     verticalMinAngle: -10
     horiziontalMaxAngle: 10

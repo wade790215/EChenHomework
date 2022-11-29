@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AssaultData
   m_EditorClassIdentifier: 
   WeaponData:
-    weaponName: 0
+    weaponName: 3
     owner: 
     damage: 2
     durability: 0
@@ -21,6 +21,8 @@ MonoBehaviour:
     scatterCount: 1
     currentBulletCount: 30
     maxBulletCount: 30
+    currentEnergy: 33
+    maxEnergy: 99
     verticalMaxAngle: 0
     verticalMinAngle: 0
     horiziontalMaxAngle: 0

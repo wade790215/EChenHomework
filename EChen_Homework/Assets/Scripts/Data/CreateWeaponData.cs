@@ -30,6 +30,10 @@ public class WeaponData
     public int currentBulletCount;
     [Header("彈藥容量")]
     public int maxBulletCount;
+    [Header("目前能量")]
+    public int currentEnergy;
+    [Header("最大能量")]
+    public int maxEnergy;
     [Header("最大垂直攻擊角度")]
     public float verticalMaxAngle;
     [Header("最小垂直攻擊角度")]

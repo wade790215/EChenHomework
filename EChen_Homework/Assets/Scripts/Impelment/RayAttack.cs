@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RayAttack : IAttack
+public class RayAttack : IAttack , IGetWeaponData
 {
     private WeaponData weaponData;
     private Transform firePoint;
 
-    public RayAttack(WeaponData weaponData, Transform firePoint)
-    {
-        this.weaponData = weaponData;
+    public RayAttack(Transform firePoint)
+    {      
         this.firePoint = firePoint; 
     }
 
@@ -38,5 +37,10 @@ public class RayAttack : IAttack
                 Debug.DrawLine(firePoint.position, firePoint.position + direction * weaponData.shootingDistance, Color.red, 5f);
             }
         }
-    }   
+    }
+
+    public void SetWeaponData(WeaponData weaponData)
+    {
+        this.weaponData = weaponData;
+    }
 }

@@ -13,6 +13,7 @@ public class GunWeaponBase
     public ShottingMode shottingMode;
     public WeaponData WeaponData;
     public AttackModule attackModule;
+    public ReloadModule reloadModule;
 
     public GunWeaponBase(ShottingMode shottingMode)
     {           
@@ -23,6 +24,11 @@ public class GunWeaponBase
     {
         this.attackModule = attackModule;    
     }       
+
+    public void SetReloadModule(ReloadModule reloadModule)
+    {
+        this.reloadModule = reloadModule;   
+    }
 }
 
 

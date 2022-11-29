@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SphereAttack : IAttack
+public class SphereAttack : IAttack ,IGetWeaponData
 {
     private WeaponData weaponData;
     private Transform firePoint;
 
-    public SphereAttack(WeaponData weaponData, Transform firePoint)
-    {
-        this.weaponData = weaponData;
+    public SphereAttack(Transform firePoint)
+    {       
         this.firePoint = firePoint;
     }
 
@@ -17,5 +16,10 @@ public class SphereAttack : IAttack
     public void DrawAttack()
     {
         //TODO 用球型碰撞來偵測
+    }
+
+    public void SetWeaponData(WeaponData weaponData)
+    {
+        this.weaponData = weaponData;
     }
 }

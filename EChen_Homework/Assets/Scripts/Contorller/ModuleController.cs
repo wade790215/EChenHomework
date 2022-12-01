@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ModuleController
 {
-    private Dictionary<int,ModuleBase> modules = new Dictionary<int,ModuleBase>();  
+    private Dictionary<int,ModuleBase> modules = new Dictionary<int,ModuleBase>();
+
+    private Dictionary<Type, ModuleBase> pairs = new Dictionary<Type, ModuleBase>();
 
     public void AddModule(int hashCode, ModuleBase module)
     {
@@ -38,6 +41,17 @@ public class ModuleController
             moduleBase = null;
             return false;   
         }        
+    }
+
+    public bool TryGetModuleBase<T>(int hashCode, out T module) where T : ModuleBase
+    {
+        if (modules.ContainsKey(hashCode))
+        {
+            module = (T)modules[hashCode];
+            return true;
+        }
+        module = default;
+        return false;
     }
 
     public List<ModuleBase> GetAllModuleBase()

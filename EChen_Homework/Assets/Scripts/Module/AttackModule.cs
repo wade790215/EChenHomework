@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackModule :ModuleBase
+public class AttackModule : ModuleBase
 {   
     public float lastAttackTime = 0f;
     public Transform firePoint;    
-    private IAttack attack;    
+    private IAttack attack;
 
     public AttackModule(Transform firePoint)
     {        

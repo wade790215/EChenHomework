@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public enum ShottingMode
 {
@@ -29,6 +30,7 @@ public class GunWeaponBase
     {
         this.reloadModule = reloadModule;   
     }
+
 }
 
 

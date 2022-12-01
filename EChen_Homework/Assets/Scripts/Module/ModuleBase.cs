@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ModuleBase 
 {
-    public WeaponData weaponData { protected get; set; }
+    public WeaponData weaponData { get; private set; }
    
     public void SetUpWeaponData(WeaponData weaponData)
     {

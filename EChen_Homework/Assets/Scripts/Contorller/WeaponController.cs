@@ -11,6 +11,50 @@ public enum GunWeapon
     AssaultGun
 }
 
+//public class WeaponComponent
+//{
+//    public virtual ModuleController Componet()
+//    {
+//        return null;
+//    }
+//}
+
+//public class Pistol : WeaponComponent
+//{
+//    public override ModuleController Componet()
+//    {
+//        ModuleController moduleController = new ModuleController();
+//        moduleController.AddModule(new AttackModule());
+//        moduleController.AddModule(new ReloadModule());
+
+//        return moduleController;
+//    }
+//}
+
+//public class Main
+//{
+//    public void Init()
+//    {
+//        WeaponFactory.Register(GunWeapon.Pistol, new Pistol());
+//        WeaponFactory.Register(GunWeapon.Pistol, new Pistol());
+//        WeaponFactory.Register(GunWeapon.Pistol, new Pistol());
+//        WeaponFactory.Register(GunWeapon.Pistol, new Pistol());
+//    }
+//}
+
+//public class WeaponFactory
+//{
+//    public WeaponController CreateWeapon(object data)
+//    {
+//        switch (data)
+//        {
+//            default:
+//                break;
+//        }
+//    }
+//}
+
+
 public class WeaponController : MonoBehaviour
 {
     public GunWeapon weaponType;

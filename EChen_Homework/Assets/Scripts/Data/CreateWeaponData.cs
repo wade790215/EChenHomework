@@ -44,6 +44,8 @@ public class WeaponData
     public float horiziontalMinAngle;
     [Header("有效射擊距離")]
     public float shootingDistance;
+    [Header("槍口座標")]
+    public Vector3 firePoint;
 }
 
 

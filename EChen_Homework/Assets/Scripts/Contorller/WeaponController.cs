@@ -68,10 +68,15 @@ public class WeaponController : MonoBehaviour
     private RayAttack rayAtk;
     private FullReload fullReload;
     private EnergyFilingReload energyReload;
-    private List<IGetWeaponData> weaponDataList = new List<IGetWeaponData>();   
+    private List<IGetWeaponData> weaponDataList = new List<IGetWeaponData>();
+
+    private void Awake()
+    {
+        weaponData.WeaponData.firePoint = firePoint.localPosition;
+    }
 
     private void Start()
-    {
+    {        
         CreateModule();
         CreateSkill();        
         GetWeapon(weaponType);
@@ -86,11 +91,11 @@ public class WeaponController : MonoBehaviour
     private void CreateModule()
     {
         moduleController = new ModuleController();
-        attackModule = new AttackModule(firePoint);
+        attackModule = new AttackModule();
         reloadModule = new ReloadModule();
        
-        moduleController.AddModule(attackModule.GetHashCode(), attackModule);
-        moduleController.AddModule(reloadModule.GetHashCode(), reloadModule);
+        //duleController.AddModule(attackModule.GetHashCode(), attackModule);
+        //duleController.AddModule(reloadModule.GetHashCode(), reloadModule);
         moduleController.SetUpModulesData(weaponData.WeaponData);
     }
 

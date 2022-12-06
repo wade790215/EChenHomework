@@ -7,12 +7,7 @@ public class AttackModule : ModuleBase
     public float lastAttackTime = 0f;
     public Transform firePoint;    
     private IAttack attack;
-
-    public AttackModule(Transform firePoint)
-    {        
-        this.firePoint = firePoint;
-    }
-
+   
     public void SetAttack(IAttack attack)
     {
         this.attack = attack;

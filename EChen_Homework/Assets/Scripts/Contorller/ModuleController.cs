@@ -4,12 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ModuleController
-{
-    private Dictionary<int,ModuleBase> modules = new Dictionary<int,ModuleBase>();
+{   
+    private Dictionary<Type, ModuleBase> modules = new Dictionary<Type, ModuleBase>();
 
-    private Dictionary<Type, ModuleBase> pairs = new Dictionary<Type, ModuleBase>();
-
-    public void AddModule(int hashCode, ModuleBase module)
+    public void AddModule(Type hashCode, ModuleBase module)
     {
         if (modules.ContainsKey(hashCode) == false)
         {
@@ -21,7 +19,7 @@ public class ModuleController
         }
     }
 
-    public void RemoveModule(int hashCode)
+    public void RemoveModule(Type hashCode)
     {
         if (modules.ContainsKey(hashCode))
         {
@@ -29,7 +27,7 @@ public class ModuleController
         }       
     }
 
-    public bool TryGetModuleBase(int hashCode,out ModuleBase moduleBase)
+    public bool TryGetModuleBase(Type hashCode,out ModuleBase moduleBase)
     {
         if (modules.TryGetValue(hashCode, out ModuleBase module))
         {
@@ -43,7 +41,7 @@ public class ModuleController
         }        
     }
 
-    public bool TryGetModuleBase<T>(int hashCode, out T module) where T : ModuleBase
+    public bool TryGetModuleBase<T>(Type hashCode, out T module) where T : ModuleBase
     {
         if (modules.ContainsKey(hashCode))
         {

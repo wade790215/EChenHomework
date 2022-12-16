@@ -5,5 +5,5 @@ using UnityEngine;
 public interface IAttack
 {   
     //Tips 抽象層方法不要傳參數，用其他方式注入
-    public void DrawAttack();
+    public abstract void Attack();
 }

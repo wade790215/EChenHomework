@@ -7,11 +7,11 @@ public class ModuleController
 {   
     private Dictionary<Type, ModuleBase> modules = new Dictionary<Type, ModuleBase>();
 
-    public void AddModule(Type hashCode, ModuleBase module)
+    public void AddModule(Type type, ModuleBase module)
     {
-        if (modules.ContainsKey(hashCode) == false)
+        if (modules.ContainsKey(type) == false)
         {
-            modules.Add(hashCode, module);
+            modules.Add(type, module);
         }
         else
         {
@@ -19,33 +19,19 @@ public class ModuleController
         }
     }
 
-    public void RemoveModule(Type hashCode)
+    public void RemoveModule(Type type)
     {
-        if (modules.ContainsKey(hashCode))
+        if (modules.ContainsKey(type))
         {
-            modules.Remove(hashCode);
+            modules.Remove(type);
         }       
-    }
+    }  
 
-    public bool TryGetModuleBase(Type hashCode,out ModuleBase moduleBase)
+    public bool TryGetModuleBase<T>(Type type, out T module) where T : ModuleBase
     {
-        if (modules.TryGetValue(hashCode, out ModuleBase module))
+        if (modules.ContainsKey(type))
         {
-            moduleBase = module;    
-            return true;
-        }
-        else
-        {
-            moduleBase = null;
-            return false;   
-        }        
-    }
-
-    public bool TryGetModuleBase<T>(Type hashCode, out T module) where T : ModuleBase
-    {
-        if (modules.ContainsKey(hashCode))
-        {
-            module = (T)modules[hashCode];
+            module = (T)modules[type];
             return true;
         }
         module = default;
@@ -70,7 +56,7 @@ public class ModuleController
         {
             foreach (var module in modules.Values)
             {
-                module.SetUpWeaponData(weaponData);
+                module.SetWeaponData(weaponData);
             }
         }       
     }

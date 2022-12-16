@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FullReload : IReload,IGetWeaponData
-{
-    private WeaponData weaponData;
-    
-    public void Reload()
+public class FullReload : ReloadBase
+{   
+    public override void Reload()
     {
         if (weaponData.currentBulletCount == weaponData.maxBulletCount)
         {
@@ -16,10 +14,5 @@ public class FullReload : IReload,IGetWeaponData
 
         weaponData.currentBulletCount = weaponData.maxBulletCount;
         Debug.Log($"{weaponData.weaponName} + Reloaded");
-    }
-
-    public void SetWeaponData(WeaponData weaponData)
-    {
-        this.weaponData = weaponData;
-    }
+    }  
 }

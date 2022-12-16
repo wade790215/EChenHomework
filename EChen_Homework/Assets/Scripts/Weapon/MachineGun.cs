@@ -2,21 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pistol : WeaponComponent
-{   
+public class MachineGun : WeaponComponent
+{
+    private AttackModule attackModule;
+    private ReloadModule reloadModule;
+
     public override ModuleController AssemblyComponent()
     {
         ModuleController moduleController = new ModuleController();
-        var attackModule = new AttackModule();
-        var reloadModule = new ReloadModule();
+        attackModule = new AttackModule();
+        reloadModule = new ReloadModule();
+
         var rayAttack = new RayAttack();
         var fullReload = new FullReload();
-        
+
         attackModule.SetAttack(rayAttack);
         reloadModule.SetReload(fullReload);
 
         moduleController.AddModule(typeof(AttackModule), attackModule);
         moduleController.AddModule(typeof(ReloadModule), reloadModule);
         return moduleController;
-    }  
+    }
 }

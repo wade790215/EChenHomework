@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GunWeapon
+public enum GunWeaponType
 {
     Pistol,
     MachineGun,
@@ -11,179 +11,65 @@ public enum GunWeapon
     AssaultGun
 }
 
-//public class WeaponComponent
-//{
-//    public virtual ModuleController Componet()
-//    {
-//        return null;
-//    }
-//}
-
-//public class Pistol : WeaponComponent
-//{
-//    public override ModuleController Componet()
-//    {
-//        ModuleController moduleController = new ModuleController();
-//        moduleController.AddModule(new AttackModule());
-//        moduleController.AddModule(new ReloadModule());
-
-//        return moduleController;
-//    }
-//}
-
-//public class Main
-//{
-//    public void Init()
-//    {
-//        WeaponFactory.Register(GunWeapon.Pistol, new Pistol());
-//        WeaponFactory.Register(GunWeapon.Pistol, new Pistol());
-//        WeaponFactory.Register(GunWeapon.Pistol, new Pistol());
-//        WeaponFactory.Register(GunWeapon.Pistol, new Pistol());
-//    }
-//}
-
-//public class WeaponFactory
-//{
-//    public WeaponController CreateWeapon(object data)
-//    {
-//        switch (data)
-//        {
-//            default:
-//                break;
-//        }
-//    }
-//}
-
-
 public class WeaponController : MonoBehaviour
 {
-    public GunWeapon weaponType;
-    public GunWeaponBase gun;
+    public GunWeaponType weaponType;    
     public CreateWeaponData weaponData;
-    public Transform firePoint;  
-    private ModuleController moduleController;
-    private AttackModule attackModule;
-    private ReloadModule reloadModule;
-    private SphereAttack sphereAtk;
-    private RayAttack rayAtk;
-    private FullReload fullReload;
-    private EnergyFilingReload energyReload;
-    private List<IGetWeaponData> weaponDataList = new List<IGetWeaponData>();
+    public Transform firePoint;      
+    private WeaponFactory weaponFactory;
 
     private void Awake()
     {
-        weaponData.WeaponData.firePoint = firePoint.localPosition;
+        weaponData.WeaponData.firePoint = firePoint.transform;
     }
 
-    private void Start()
-    {        
-        CreateModule();
-        CreateSkill();        
-        GetWeapon(weaponType);
-    }  
-
-    private void Update()
+    public void SetWeaponFactory(WeaponFactory weaponFactory)
     {
-        JudgementShottingMode();
-        Reload();      
+        this.weaponFactory = weaponFactory;
     }
 
-    private void CreateModule()
-    {
-        moduleController = new ModuleController();
-        attackModule = new AttackModule();
-        reloadModule = new ReloadModule();
-       
-        //duleController.AddModule(attackModule.GetHashCode(), attackModule);
-        //duleController.AddModule(reloadModule.GetHashCode(), reloadModule);
-        moduleController.SetUpModulesData(weaponData.WeaponData);
-    }
-
-    private void CreateSkill()
-    {
-        sphereAtk = new SphereAttack(firePoint);
-        rayAtk = new RayAttack(firePoint);
-
-        fullReload = new FullReload();
-        energyReload = new EnergyFilingReload();
-
-        weaponDataList.Add(sphereAtk);
-        weaponDataList.Add(rayAtk);
-        weaponDataList.Add(fullReload);
-        weaponDataList.Add(energyReload);
-
-        foreach (var dataList in weaponDataList)
-        {
-            dataList.SetWeaponData(weaponData.WeaponData);
-        }
-    }
-
-    private void GetWeapon(GunWeapon getWeapon)
+    public void OnStart()
     {       
-        switch (getWeapon)
+        weaponFactory.SetWeaponData(weaponData.WeaponData);
+        if (weaponFactory.TryGetWeaponComponent(weaponType, out Pistol pistol))
         {
-            case GunWeapon.Pistol:
-                gun = new GunWeaponBase(ShottingMode.SingleShot);                
-                attackModule.SetAttack(rayAtk);
-                reloadModule.SetReload(fullReload);
-                gun.SetAttackModule(attackModule);
-                gun.SetReloadModule(reloadModule);
-                break;
-
-            case GunWeapon.MachineGun:
-                gun = new GunWeaponBase(ShottingMode.Auto);               
-                attackModule.SetAttack(rayAtk);
-                reloadModule.SetReload(fullReload);
-                gun.SetAttackModule(attackModule);
-                gun.SetReloadModule(reloadModule);
-                break;
-
-            case GunWeapon.ShotGun:
-                gun = new GunWeaponBase(ShottingMode.SingleShot);               
-                attackModule.SetAttack(sphereAtk);
-                reloadModule.SetReload(fullReload);
-                gun.SetAttackModule(attackModule);
-                gun.SetReloadModule(reloadModule);
-                break;
-
-            case GunWeapon.AssaultGun:
-                gun = new GunWeaponBase(ShottingMode.Auto);               
-                attackModule.SetAttack(rayAtk);
-                reloadModule.SetReload(energyReload);
-                gun.SetAttackModule(attackModule);
-                gun.SetReloadModule(reloadModule);
-                break;
+            Debug.Log(pistol.weaponData.weaponName);
         }
-    }
-    
-    private void JudgementShottingMode()
-    {
-        switch (gun.shottingMode)
-        {
-            case ShottingMode.SingleShot:
-                
-                if (Input.GetKeyDown(KeyCode.A))
-                {
-                    gun.attackModule.Attack();
-                }
-                break;
-
-            case ShottingMode.Auto:
-               
-                if (Input.GetKey(KeyCode.Space))
-                {
-                    gun.attackModule.Attack();
-                }
-                break;
-        }
-    }
-
-    private void Reload()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            gun.reloadModule.Reload();
-        }
-    }
+    }  
    
+    public void OnUpdate()
+    {
+        //JudgementShottingMode();
+        //Reload();      
+    }      
+    
+    //private void JudgementShottingMode()
+    //{
+    //    switch (gun.shottingMode)
+    //    {
+    //        case ShottingMode.SingleShot:
+                
+    //            if (Input.GetKeyDown(KeyCode.A))
+    //            {
+    //                gun.attackModule.Attack();
+    //            }
+    //            break;
+
+    //        case ShottingMode.Auto:
+               
+    //            if (Input.GetKey(KeyCode.Space))
+    //            {
+    //                gun.attackModule.Attack();
+    //            }
+    //            break;
+    //    }
+    //}
+
+    //private void Reload()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.R))
+    //    {
+    //        gun.reloadModule.Reload();
+    //    }
+    //}   
 }

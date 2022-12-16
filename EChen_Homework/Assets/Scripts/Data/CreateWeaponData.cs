@@ -12,7 +12,7 @@ public class CreateWeaponData : ScriptableObject
 public class WeaponData 
 {
     [Header("武器名稱")]
-    public GunWeapon weaponName;
+    public GunWeaponType weaponName;
     [Header("持有者")]
     public string owner;
     [Header("攻擊力")]
@@ -45,7 +45,7 @@ public class WeaponData
     [Header("有效射擊距離")]
     public float shootingDistance;
     [Header("槍口座標")]
-    public Vector3 firePoint;
+    public Transform firePoint;
 }
 
 

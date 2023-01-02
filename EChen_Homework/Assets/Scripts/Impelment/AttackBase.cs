@@ -11,7 +11,7 @@ public enum ShottingMode
 public abstract class AttackBase : IAttack, IGetWeaponData
 {
     public ShottingMode shottingMode;
-    public WeaponData weaponData { get; private set; }
+    public WeaponData weaponData;
     public abstract void Attack();
 
     public bool IsAttackable()

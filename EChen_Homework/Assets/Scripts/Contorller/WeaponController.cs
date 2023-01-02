@@ -46,77 +46,31 @@ public class WeaponController : MonoBehaviour
     }
 
     public void OnStart()
-    {
-        weaponFactory.SetWeaponData(weaponData.WeaponData);
-        weaponFactory.TryGetWeaponComponent(weaponType, out myWeapon);
-        //if (weaponFactory.TryGetWeaponComponent(weaponType, out WeaponComponent weapon))
-        //{
-        //    ModuleController moduleController = weapon.AssemblyComponent();
-
-
-        //    Debug.Log(weapon.weaponData.weaponName);
-        //}
+    {       
+        if(weaponFactory.TryGetWeaponComponent(weaponType, out  WeaponComponent myWeapon))
+        {
+            this.myWeapon = myWeapon;
+            this.myWeapon.SetWeaponData(weaponData.WeaponData);
+        }     
     }
 
     public void OnUpdate()
     {
-        //JudgementShottingMode();
-        //Reload();      
+        if (myWeapon != null)
+        {
+            ModuleController moduleController = myWeapon.AssemblyComponent();
+            if (moduleController != null)
+            {
+                if (moduleController.TryGetModuleBase(typeof(AttackModule),out AttackModule attackModule))
+                {
+                    attackModule.Update();
+                }
 
-        //    if (myWeapon != null)
-        //    {
-        //        ModuleController moduleController = myWeapon.AssemblyComponent();
-        //        if(moduleController != null)
-        //        {
-        //            moduleController.Update();
-        //        }
-
-        //        ModuleController moduleController = myWeapon.AssemblyComponent();
-        //        var modeList = moduleController.GetAllModuleBase();
-        //        modeList.ForEach(p => p.Update());
-        //    }
-        //}
-
-        //private void UseSkill()
-        //{
-        //    ModuleController moduleController = myWeapon.AssemblyComponent();
-        //    if(moduleController.TryGetModuleBase(typeof(SkillModule), out SkillModule skillModule))
-        //    {
-        //        skillModule.Spell();
-        //    }
-        //}
-
-        //private void JudgementShottingMode()
-        //{
-
-
-        //    switch (weapon..shottingMode)
-        //    {
-        //        case ShottingMode.SingleShot:
-
-        //            if (Input.GetKeyDown(KeyCode.A))
-        //            {
-        //                weapon.attackModule.Attack();
-        //            }
-        //            break;
-
-        //        case ShottingMode.Auto:
-
-        //            if (Input.GetKey(KeyCode.Space))
-        //            {
-        //                gun.attackModule.Attack();
-        //            }
-        //            break;
-        //    }
-        //    //}
-
-        //    //private void Reload()
-        //    //{
-        //    //    if (Input.GetKeyDown(KeyCode.R))
-        //    //    {
-        //    //        gun.reloadModule.Reload();
-        //    //    }
-        //    //}   
-        //}
+                if (moduleController.TryGetModuleBase(typeof(ReloadModule), out ReloadModule reloadModule))
+                {
+                    reloadModule.Update();
+                }
+            }           
+        }
     }
 }

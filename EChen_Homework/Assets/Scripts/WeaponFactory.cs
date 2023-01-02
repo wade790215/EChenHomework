@@ -42,7 +42,7 @@ public class WeaponFactory
         return false;
     }
 
-    public List<WeaponComponent> GetAllProducts()
+    private List<WeaponComponent> GetAllProducts()
     {
         List<WeaponComponent> products = new List<WeaponComponent>();
 

@@ -49,15 +49,5 @@ public class ModuleController
 
         return cacheModuleBase;
     }
-
-    public void SetUpModulesData(WeaponData weaponData)
-    {
-        if(modules.Count > 0)
-        {
-            foreach (var module in modules.Values)
-            {
-                module.SetWeaponData(weaponData);
-            }
-        }       
-    }
+ 
 }

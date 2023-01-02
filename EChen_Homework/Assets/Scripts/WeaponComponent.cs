@@ -15,7 +15,5 @@ public abstract class WeaponComponent:IGetWeaponData
     public  void SetWeaponData(WeaponData weaponData)
     {
         this.weaponData = weaponData;
-    }
-
-  
+    }  
 }

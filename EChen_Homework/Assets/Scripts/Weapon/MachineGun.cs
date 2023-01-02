@@ -18,11 +18,12 @@ public class MachineGun : WeaponComponent
 
         rayAttack.shottingMode = ShottingMode.AutoShot;
 
-        attackModule.SetAttack(rayAttack);
-        reloadModule.SetReload(fullReload);
+        attackModule.Init(rayAttack,weaponData);
+        reloadModule.Init(fullReload,weaponData);
 
         moduleController.AddModule(typeof(AttackModule), attackModule);
         moduleController.AddModule(typeof(ReloadModule), reloadModule);
+        
         return moduleController;
     }
 }

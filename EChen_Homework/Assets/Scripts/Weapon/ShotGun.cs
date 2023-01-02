@@ -12,11 +12,12 @@ public class ShotGun : WeaponComponent
         var sphereAttack = new SphereAttack();
         var eachReload = new EachFilingReload();
 
-        attackModule.SetAttack(sphereAttack);
-        reloadModule.SetReload(eachReload);       
+        attackModule.Init(sphereAttack,weaponData);
+        reloadModule.Init(eachReload, weaponData);       
 
         moduleController.AddModule(typeof(AttackModule), attackModule);
-        moduleController.AddModule(typeof(ReloadModule), reloadModule);
+        moduleController.AddModule(typeof(ReloadModule), reloadModule);        
+
         return moduleController;
     }
 }

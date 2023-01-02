@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class ReloadBase : IReload, IGetWeaponData
 {
-    public WeaponData weaponData { get; private set; }
+    public WeaponData weaponData;
    
     public abstract void Reload();    
 

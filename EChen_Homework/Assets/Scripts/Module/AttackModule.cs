@@ -6,13 +6,13 @@ public class AttackModule : ModuleBase
 {           
     private AttackBase attack;
    
-    public void SetAttack(AttackBase attack)
+    public void Init(AttackBase attack, WeaponData weaponData)
     {
         this.attack = attack;
-        this.attack.SetWeaponData(weaponData);
+        attack.SetWeaponData(weaponData);
     }
    
-    public void Attack()
+    private void Attack()
     {
         if(attack != null)
         {
@@ -32,10 +32,7 @@ public class AttackModule : ModuleBase
     {
         if(Input.GetKeyDown(KeyCode.A))
         {
-            if (attack != null)
-            {
-                attack.Attack();
-            }
+            Attack();           
         }
     }
 }

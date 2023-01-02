@@ -9,6 +9,7 @@ using UnityEngine;
 public abstract class WeaponComponent:IGetWeaponData
 {
     public WeaponData weaponData { get; private set; }
+
     public abstract ModuleController AssemblyComponent();
 
     public  void SetWeaponData(WeaponData weaponData)

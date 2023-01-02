@@ -61,6 +61,24 @@ public class WeaponFactory
         }
     }
 
+    public void AssemblyWeaponComponent()
+    {
+        var products = GetAllProducts();
+        
+        if (products.Count <= 0)
+        {
+            Debug.LogError($"拿到一個空集合");
+            return;
+        }
+        else
+        {
+            foreach (var weaponComponent in products)
+            {
+                weaponComponent.AssemblyComponent();
+            }
+        }
+    }
+
     public void SetWeaponData(WeaponData weaponData)
     {
         var products = GetAllProducts();

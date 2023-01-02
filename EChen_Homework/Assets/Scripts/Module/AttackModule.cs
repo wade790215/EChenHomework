@@ -18,5 +18,24 @@ public class AttackModule : ModuleBase
         {
             attack.Attack();
         }  
-    }   
+    }
+
+    //public bool IsAttackable()
+    //{
+    //    if(attack != null)
+    //    {
+    //        return attack.IsAttackable();
+    //    }
+    //}
+
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            if (attack != null)
+            {
+                attack.Attack();
+            }
+        }
+    }
 }

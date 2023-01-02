@@ -11,10 +11,12 @@ public class MachineGun : WeaponComponent
     {
         ModuleController moduleController = new ModuleController();
         attackModule = new AttackModule();
-        reloadModule = new ReloadModule();
+        reloadModule = new ReloadModule();        
 
         var rayAttack = new RayAttack();
         var fullReload = new FullReload();
+
+        rayAttack.shottingMode = ShottingMode.AutoShot;
 
         attackModule.SetAttack(rayAttack);
         reloadModule.SetReload(fullReload);

@@ -6,4 +6,6 @@ public interface IAttack
 {   
     //Tips 抽象層方法不要傳參數，用其他方式注入
     public abstract void Attack();
+
+    public abstract bool IsAttackable();
 }

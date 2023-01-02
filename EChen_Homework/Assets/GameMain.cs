@@ -16,10 +16,10 @@ public class GameMain : MonoBehaviour
         weaponFactory.AddProductionLine(GunWeaponType.ShotGun, new ShotGun());
 
         weaponController = FindObjectsOfType<WeaponController>(true);
-
+        weaponFactory.AssemblyWeaponComponent();
         foreach (var controller in weaponController)
         {
-            controller.SetWeaponFactory(weaponFactory);
+            controller.SetWeaponFactory(weaponFactory);            
         }
 
         foreach (var controller in weaponController)

@@ -5,6 +5,7 @@ using UnityEngine;
 public class RayAttack : AttackBase
 {
     public float lastAttackTime = 0f;
+    
     public override void Attack()
     {
         if (!AllowAttack())

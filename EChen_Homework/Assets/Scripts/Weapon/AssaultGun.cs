@@ -13,6 +13,8 @@ public class AssaultGun : WeaponComponent
         var rayAttack = new RayAttack();
         var fullReload = new FullReload();
 
+        rayAttack.shottingMode = ShottingMode.TripleShot;
+
         attackModule.SetAttack(rayAttack);
         reloadModule.SetReload(fullReload);
 

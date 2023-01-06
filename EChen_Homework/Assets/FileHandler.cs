@@ -30,10 +30,10 @@ public class FileHandler
         this.dataPath = dataPath;
     }
     
-    public void SaveToJSON<T> (List<T> toSave, string filename) 
+    public void SaveToJSON<T> (List<T> toSave) 
     {        
-        string content = JsonHelper.ToJson<T> (toSave.ToArray());
-        WriteFile (GetPath (filename), content);        
+        string content = dataParser.ParseTo(toSave);
+        WriteFile (GetDataPath<T>(), content);        
     }
 
     public void SaveToJSON<T> (T toSave)
@@ -44,7 +44,7 @@ public class FileHandler
 
     public List<T> ReadListFromJSON<T> (string filename)
     {
-        string content = ReadFile (GetPath (filename));
+        string content = ReadFile (GetDataPath<T>());
 
         if (string.IsNullOrEmpty (content) || content == "{}") 
         {
@@ -56,26 +56,19 @@ public class FileHandler
 
     }
 
-    public T ReadFromJSON<T> (string filename) 
+    public T ReadFromJSON<T>() 
     {
-        string content = ReadFile (GetPath (filename));
+        string content = ReadFile(GetDataPath<T>());
 
         if (string.IsNullOrEmpty (content) || content == "{}") 
         {
-            return default (T);
+            return default;
         }
 
-        T res = JsonUtility.FromJson<T> (content);
+        T res = dataParser.ParseFrom<T>(content); 
         return res;
-
     }
-
-    private string GetPath (string filename) 
-    {
-        DirectoryInfo directoryInfo = new DirectoryInfo(Application.dataPath);       
-        return directoryInfo.Parent.FullName + "/" + filename;       
-    }
-
+    
     private string GetDataPath<T>()
     {
         var dataName = $"{typeof(T).Name}.{dataParser.GetExtension().TrimStart('.')}";
@@ -120,16 +113,9 @@ public static class JsonHelper
     {
         Wrapper<T> wrapper = new Wrapper<T> ();
         wrapper.Items = array;
-        return JsonUtility.ToJson (wrapper);
+        return JsonUtility.ToJson (wrapper,true);
     }
-
-    public static string ToJson<T> (T[] array, bool prettyPrint) 
-    {
-        Wrapper<T> wrapper = new Wrapper<T> ();
-        wrapper.Items = array;
-        return JsonUtility.ToJson (wrapper, prettyPrint);
-    }
-
+  
     [Serializable]
     private class Wrapper<T> {
         public T[] Items;

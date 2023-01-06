@@ -17,5 +17,10 @@ public class UnityJsonParser : IDataParser
     public string ParseTo(object data)
     {
         return JsonUtility.ToJson(data, true);
-    }   
+    }
+
+    public string ParseTo<T>(List<T> data)
+    {
+        return JsonHelper.ToJson(data.ToArray());
+    }
 }

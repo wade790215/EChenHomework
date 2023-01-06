@@ -33,7 +33,9 @@ public class GameMain : MonoBehaviour
         var test2 =new Test() { HP = 999, Name = "Cindy", Level = new int[] { 99, 111} };
         tests.Add(test1);
         tests.Add(test2);
-       
+
+        FH.SaveToJSON(tests);
+
 
         weaponFactory = new WeaponFactory();
         weaponFactory.AddProductionLine(GunWeaponType.Pistol, new Pistol());

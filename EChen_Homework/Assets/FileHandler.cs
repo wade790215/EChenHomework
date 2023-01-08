@@ -47,22 +47,21 @@ public class FileHandler
         string content = ReadFile (GetDataPath<T>());
 
         if (string.IsNullOrEmpty (content) || content == "{}") 
-        {
+        {            
             return new List<T> ();
         }
 
-        List<T> res = JsonHelper.FromJson<T> (content).ToList ();
+        List<T> res = dataParser.ParseFormListVer<T>(content);
         return res;
-
     }
 
-    public T ReadFromJSON<T>() 
+    public T ReadFromJSON<T>()
     {
         string content = ReadFile(GetDataPath<T>());
 
         if (string.IsNullOrEmpty (content) || content == "{}") 
-        {
-            return default;
+        {            
+            return default;            
         }
 
         T res = dataParser.ParseFrom<T>(content); 
@@ -97,7 +96,7 @@ public class FileHandler
                 return content;
             }
         }
-        return "";
+        return string.Empty;
     }
 }
 

@@ -6,6 +6,8 @@ public interface IDataParser
 
     public T ParseFrom<T>(string data);
 
+    public List<T> ParseFormListVer<T>(string data); 
+
     public string ParseTo(object data);
 
     public string ParseTo<T>(List<T> data);   

@@ -87,6 +87,7 @@ public class FileHandler
                     using (StreamWriter writer = new StreamWriter(fileStream))
                     {
                         writer.Write(content);
+                        Debug.Log("Àx¦s¦¨¥\");
                     }
                 }
             }

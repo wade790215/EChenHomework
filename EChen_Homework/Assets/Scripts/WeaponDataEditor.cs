@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using System;
 
 public class WeaponDataEditor : EditorWindow
 {   
     private List<WeaponInfo> weapons = new List<WeaponInfo>();
-    private FileHandler fileHandler;      
+    private FileHandler fileHandler;
+    private Vector2 scrollPos;
     private string dataPath = $"Assets/Scripts/Data/WeaponsData.asset";
     private string weaponsDataPath;   
 
@@ -53,8 +55,7 @@ public class WeaponDataEditor : EditorWindow
           
             if (GUILayout.Button("儲存資料", GUILayout.Height(50)))
             {
-                fileHandler.SaveToJSON(weapons);
-                Debug.Log("儲存成功");
+                fileHandler.SaveToJSON(weapons);                
             }
         }
         GUILayout.EndHorizontal();  
@@ -62,6 +63,7 @@ public class WeaponDataEditor : EditorWindow
 
         GUILayout.BeginVertical();
         {
+            scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
             GUILayout.Space(10);
             for (int i = 0; i < weapons.Count; i++)
             {
@@ -74,11 +76,16 @@ public class WeaponDataEditor : EditorWindow
 
                 if (GUILayout.Button("移除武器"))
                 {
-                    weapons.RemoveAt(i);
+                    var result = MessageBoxController.ShowMessageBox("確定要移除!!", "警告", MessageBoxRetrunNumber.OKNo);
+                    if(result == (int)MessageResult.OK)
+                    {
+                        weapons.RemoveAt(i);
+                    }
                 }
                 GUILayout.Space(10);
             }
             GUILayout.Space(10);
+            EditorGUILayout.EndScrollView();
         }
         GUILayout.EndVertical();        
 

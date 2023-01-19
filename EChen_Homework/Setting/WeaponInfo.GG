@@ -1,0 +1,31 @@
+{
+    "Items": [
+        {
+            "weaponType": 3,
+            "damage": 9527.0,
+            "attackRate": 1223.0,
+            "scatterCount": 0,
+            "maxBulletCount": 0,
+            "shootingDistance": 0,
+            "dataIndex": -1
+        },
+        {
+            "weaponType": 2,
+            "damage": 20.0,
+            "attackRate": 0.0,
+            "scatterCount": 0,
+            "maxBulletCount": 0,
+            "shootingDistance": 0,
+            "dataIndex": -1
+        },
+        {
+            "weaponType": 3,
+            "damage": 30.0,
+            "attackRate": 0.0,
+            "scatterCount": 0,
+            "maxBulletCount": 0,
+            "shootingDistance": 0,
+            "dataIndex": -1
+        }
+    ]
+}

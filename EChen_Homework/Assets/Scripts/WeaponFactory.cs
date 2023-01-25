@@ -12,6 +12,7 @@ public class WeaponFactory
         if (weapons.ContainsKey(gunWeapon) == false)
         {
             weapons.Add(gunWeapon,weaponComponent);
+            Debug.Log($"新增{gunWeapon}武器成功");
         }
         else
         {
@@ -93,8 +94,7 @@ public class WeaponFactory
             {
                 weaponComponent.SetWeaponData(weaponData);
                 Debug.LogError($"初始化武器資料:{weaponComponent.weaponData.weaponName}");
-            }
-           
+            }           
         }
     }
 

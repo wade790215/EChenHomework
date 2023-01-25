@@ -42,7 +42,7 @@ public class FileHandler
         WriteFile(GetDataPath<T>(), content);
     }
 
-    public List<T> ReadListFromJSON<T>(string filename)
+    public List<T> ReadListFromJSON<T>()
     {
         string content = ReadFile(GetDataPath<T>());
 

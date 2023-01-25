@@ -1,97 +1,144 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
 using System;
+using System.Reflection;
 
 public class WeaponDataEditor : EditorWindow
-{   
+{
     private List<WeaponInfo> weapons = new List<WeaponInfo>();
     private FileHandler fileHandler;
-    private Vector2 scrollPos;
+    private Vector2 scrollPos;    
     private string dataPath = $"Assets/Scripts/Data/WeaponsData.asset";
-    private string weaponsDataPath;   
+    private string status = "WeaponInfos";
+    private bool showWeaponInfo = false;
 
-    [MenuItem("§Úªº½s¿è¾¹/ªZ¾¹½s¿è¾¹ #g")]
+    [MenuItem("æˆ‘çš„ç·¨è¼¯å™¨/æ­¦å™¨ç·¨è¼¯å™¨ #g")]
     public static void ShowWeaponEditroWindow()
     {
         GetWindow(typeof(WeaponDataEditor));
     }
 
     private void OnEnable()
-    {       
+    {
         fileHandler = new FileHandler();
-        DirectoryInfo directoryInfo = new DirectoryInfo(Application.dataPath);
-        weaponsDataPath = Path.Combine(directoryInfo.Parent.FullName, dataPath);
-
-        if (File.Exists(weaponsDataPath) == false)
-        {
-            var asset = CreateInstance<WeaponEditorData>();
-            AssetDatabase.CreateAsset(asset, dataPath);
-        }
-        else
-        {
-            Debug.Log("ÀÉ®×¤w¦s¦b");
-        }
-        var cacheEditorData = AssetDatabase.LoadAssetAtPath<WeaponEditorData>(dataPath);
-        weapons = cacheEditorData.weapons;
+        weapons = CreateWeaponData();
     }
 
     private void OnDisable()
     {
-        
+
     }
 
-
     private void OnGUI()
-    {        
+    {
         GUILayout.BeginHorizontal();
         {
-            if (GUILayout.Button("·s¼WªZ¾¹",GUILayout.Height(50)))
+            if (GUILayout.Button("æ–°å¢æ­¦å™¨", GUILayout.Height(50)))
             {
                 weapons.Add(new WeaponInfo());
+                showWeaponInfo = true;
             }
-          
-            if (GUILayout.Button("Àx¦s¸ê®Æ", GUILayout.Height(50)))
+
+            if (GUILayout.Button("å„²å­˜è³‡æ–™", GUILayout.Height(50)))
             {
-                fileHandler.SaveToJSON(weapons);                
+                fileHandler.SaveToJSON(weapons);
+            }
+
+            if (GUILayout.Button("æ›´æ–°åˆ—è¡¨", GUILayout.Height(50)))
+            {
+                RefreshWeaponList();
+            }
+
+            if (GUILayout.Button("å¾©åŸè¨­å®šæª”è³‡æ–™", GUILayout.Height(50)))
+            {
+                var result = MessageBoxController.ShowMessageBox("è‹¥æœªå„²å­˜è³‡æ–™ï¼Œå°‡è¢«è¨­å®šæª”è¦†è“‹!!", "è­¦å‘Š", MessageBoxRetrunNumber.OKNo);
+                if (result == (int)MessageResult.OK)
+                {
+                    RecoverSettingData();
+                }
+                else
+                {
+                    Debug.Log($"å–æ¶ˆå¾©åŸ");
+                }
             }
         }
-        GUILayout.EndHorizontal();  
-        
+        GUILayout.EndHorizontal();
+
 
         GUILayout.BeginVertical();
         {
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
-            GUILayout.Space(10);
-            for (int i = 0; i < weapons.Count; i++)
+            showWeaponInfo = EditorGUILayout.Foldout(showWeaponInfo, status);
+            CreateWeaponDataArea();
+            EditorGUILayout.EndScrollView();
+        }
+        GUILayout.EndVertical();
+
+        if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Escape)
+        {
+            Close();
+        }
+    }
+
+    private void RefreshWeaponList()
+    {
+        CreateWeaponDataArea();
+    }
+
+    private void RecoverSettingData()
+    {
+        weapons.Clear();
+        weapons.AddRange(fileHandler.ReadListFromJSON<WeaponInfo>());   
+        CreateWeaponDataArea();
+    }
+
+    private void CreateWeaponDataArea()
+    {    
+        GUILayout.Space(10);
+
+        for (int i = 0; i < weapons.Count; i++)
+        {
+            if (showWeaponInfo)
             {
-                weapons[i].weaponType = (GunWeaponType)EditorGUILayout.EnumPopup("ªZ¾¹Ãş«¬", weapons[i].weaponType);
-                weapons[i].damage = EditorGUILayout.FloatField("§ğÀ»¤O", weapons[i].damage);
-                weapons[i].attackRate = EditorGUILayout.FloatField("¨C¬í§ğÀ»¦¸¼Æ", weapons[i].attackRate);
-                weapons[i].maxBulletCount = EditorGUILayout.IntField("³Ì¤j¸Ë¶ñ¼Æ¶q", weapons[i].maxBulletCount);
-                weapons[i].shootingDistance = EditorGUILayout.IntField("¦³®Ä®gÀ»¶ZÂ÷", weapons[i].shootingDistance);                
+                weapons[i].weaponType = (GunWeaponType)EditorGUILayout.EnumPopup("æ­¦å™¨é¡å‹", weapons[i].weaponType);
+                weapons[i].damage = EditorGUILayout.FloatField("æ”»æ“ŠåŠ›", weapons[i].damage);
+                weapons[i].attackRate = EditorGUILayout.FloatField("æ¯ç§’æ”»æ“Šæ¬¡æ•¸", weapons[i].attackRate);
+                weapons[i].maxBulletCount = EditorGUILayout.IntField("æœ€å¤§è£å¡«æ•¸é‡", weapons[i].maxBulletCount);
+                weapons[i].shootingDistance = EditorGUILayout.IntField("æœ‰æ•ˆå°„æ“Šè·é›¢", weapons[i].shootingDistance);
                 weapons[i].dataIndex = i;
 
-                if (GUILayout.Button("²¾°£ªZ¾¹"))
+                if (GUILayout.Button("ç§»é™¤æ­¦å™¨"))
                 {
-                    var result = MessageBoxController.ShowMessageBox("½T©w­n²¾°£!!", "Äµ§i", MessageBoxRetrunNumber.OKNo);
-                    if(result == (int)MessageResult.OK)
+                    var result = MessageBoxController.ShowMessageBox("ç¢ºå®šè¦ç§»é™¤!!", "è­¦å‘Š", MessageBoxRetrunNumber.OKNo);
+                    if (result == (int)MessageResult.OK)
                     {
                         weapons.RemoveAt(i);
                     }
                 }
                 GUILayout.Space(10);
             }
-            GUILayout.Space(10);
-            EditorGUILayout.EndScrollView();
         }
-        GUILayout.EndVertical();        
+        GUILayout.Space(10);
+    }
 
-        if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Escape)
+   
+
+    private List<WeaponInfo> CreateWeaponData()
+    {
+        DirectoryInfo directoryInfo = new DirectoryInfo(Application.dataPath);
+        var weaponsDataPath = Path.Combine(directoryInfo.Parent.FullName, dataPath);
+
+        if (File.Exists(weaponsDataPath) == false)
         {
-            Close();
+            var asset = CreateInstance<WeaponEditorData>();
+            AssetDatabase.CreateAsset(asset, dataPath);
         }
+
+        var cacheEditorData = AssetDatabase.LoadAssetAtPath<WeaponEditorData>(dataPath);       
+        
+        return cacheEditorData.weapons;
     }
 }

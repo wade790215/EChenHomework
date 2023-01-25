@@ -2,39 +2,22 @@
     "Items": [
         {
             "weaponType": 0,
-            "damage": 25.0,
-            "attackRate": 4.0,
+            "damage": 123.0,
+            "attackRate": 0.0,
             "scatterCount": 0,
-            "maxBulletCount": 12,
-            "shootingDistance": 4,
+            "maxBulletCount": 0,
+            "shootingDistance": 0,
             "dataIndex": 0
         },
         {
-            "weaponType": 1,
-            "damage": 5.0,
-            "attackRate": 20.0,
-            "scatterCount": 0,
-            "maxBulletCount": 100,
-            "shootingDistance": 10,
-            "dataIndex": 1
-        },
-        {
             "weaponType": 2,
-            "damage": 12.0,
-            "attackRate": 6.0,
+            "damage": 365.0,
+            "attackRate": 0.0,
             "scatterCount": 0,
-            "maxBulletCount": 6,
-            "shootingDistance": 2,
-            "dataIndex": 2
-        },
-        {
-            "weaponType": 3,
-            "damage": 8.0,
-            "attackRate": 10.0,
-            "scatterCount": 0,
-            "maxBulletCount": 30,
-            "shootingDistance": 6,
-            "dataIndex": 3
+            "maxBulletCount": 0,
+            "shootingDistance": 0,
+            "dataIndex": 1
         }
+      
     ]
 }

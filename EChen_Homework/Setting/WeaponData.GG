@@ -1,0 +1,52 @@
+{
+    "Items": [
+        {
+            "weaponType": 0,
+            "owner": "",
+            "damage": 6.0,
+            "durability": 100.0,
+            "attackRate": 2.0,
+            "scatterCount": 1,
+            "currentBulletCount": 10,
+            "maxBulletCount": 6,
+            "verticalMaxAngle": 10.0,
+            "verticalMinAngle": 0.0,
+            "horiziontalMaxAngle": 10.0,
+            "horiziontalMinAngle": 0.0,
+            "shootingDistance": 7.0,
+            "dataIndex": 0
+        },
+        {
+            "weaponType": 3,
+            "owner": "",
+            "damage": 3.0,
+            "durability": 100.0,
+            "attackRate": 5.0,
+            "scatterCount": 1,
+            "currentBulletCount": 10,
+            "maxBulletCount": 30,
+            "verticalMaxAngle": 10.0,
+            "verticalMinAngle": 0.0,
+            "horiziontalMaxAngle": 10.0,
+            "horiziontalMinAngle": 0.0,
+            "shootingDistance": 10.0,
+            "dataIndex": 1
+        },
+        {
+            "weaponType": 2,
+            "owner": "",
+            "damage": 10.0,
+            "durability": 100.0,
+            "attackRate": 1.0,
+            "scatterCount": 10,
+            "currentBulletCount": 10,
+            "maxBulletCount": 8,
+            "verticalMaxAngle": 10.0,
+            "verticalMinAngle": 0.0,
+            "horiziontalMaxAngle": 10.0,
+            "horiziontalMinAngle": 0.0,
+            "shootingDistance": 4.0,
+            "dataIndex": 2
+        }
+    ]
+}

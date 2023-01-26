@@ -6,10 +6,11 @@ public class AttackModule : ModuleBase
 {           
     private AttackBase attack;
    
-    public void Init(AttackBase attack, WeaponData weaponData)
+    public void Init(AttackBase attack, WeaponData weaponData,Transform firePoint)
     {
         this.attack = attack;
         attack.SetWeaponData(weaponData);
+        attack.SetFirePoint(firePoint);
     }
    
     private void Attack()

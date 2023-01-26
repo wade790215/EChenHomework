@@ -8,11 +8,11 @@ public class FullReload : ReloadBase
     {
         if (weaponData.currentBulletCount == weaponData.maxBulletCount)
         {
-            Debug.Log($"{weaponData.weaponName} + Magazine is full.");
+            Debug.Log($"{weaponData.weaponType} + Magazine is full.");
             return;
         }
 
         weaponData.currentBulletCount = weaponData.maxBulletCount;
-        Debug.Log($"{weaponData.weaponName} + Reloaded");
+        Debug.Log($"{weaponData.weaponType} + Reloaded");
     }  
 }

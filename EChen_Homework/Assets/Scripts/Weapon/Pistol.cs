@@ -13,8 +13,8 @@ public class Pistol : WeaponComponent
         var fullReload = new FullReload();
 
         rayAttack.shottingMode = ShottingMode.SingleShot;
-        attackModule.Init(rayAttack,weaponData);
-        reloadModule.Init(fullReload, weaponData);
+        attackModule.Init(rayAttack,weaponData,firePoint);
+        reloadModule.Init(fullReload,weaponData);
 
         moduleController.AddModule(typeof(AttackModule), attackModule);
         moduleController.AddModule(typeof(ReloadModule), reloadModule);             

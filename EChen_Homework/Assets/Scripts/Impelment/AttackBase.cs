@@ -12,6 +12,7 @@ public abstract class AttackBase : IAttack, IGetWeaponData
 {
     public ShottingMode shottingMode;
     public WeaponData weaponData;
+    protected Transform firePoint;
     public abstract void Attack();
 
     public bool IsAttackable()
@@ -22,5 +23,9 @@ public abstract class AttackBase : IAttack, IGetWeaponData
     public void SetWeaponData(WeaponData weaponData)
     {
         this.weaponData = weaponData;
+    }
+    public void SetFirePoint(Transform firePoint)
+    {
+        this.firePoint = firePoint; 
     }
 }

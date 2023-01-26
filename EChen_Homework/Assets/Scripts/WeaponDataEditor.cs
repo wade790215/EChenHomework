@@ -8,11 +8,11 @@ using System.Reflection;
 
 public class WeaponDataEditor : EditorWindow
 {
-    private List<WeaponInfo> weapons = new List<WeaponInfo>();
+    private List<WeaponData> weapons = new List<WeaponData>();
     private FileHandler fileHandler;
     private Vector2 scrollPos;    
     private string dataPath = $"Assets/Scripts/Data/WeaponsData.asset";
-    private string status = "WeaponInfos";
+    private string status = "WeaponDatas";
     private bool showWeaponInfo = false;
 
     [MenuItem("我的編輯器/武器編輯器 #g")]
@@ -38,7 +38,7 @@ public class WeaponDataEditor : EditorWindow
         {
             if (GUILayout.Button("新增武器", GUILayout.Height(50)))
             {
-                weapons.Add(new WeaponInfo());
+                weapons.Add(new WeaponData());
                 showWeaponInfo = true;
             }
 
@@ -91,7 +91,7 @@ public class WeaponDataEditor : EditorWindow
     private void RecoverSettingData()
     {
         weapons.Clear();
-        weapons.AddRange(fileHandler.ReadListFromJSON<WeaponInfo>());   
+        weapons.AddRange(fileHandler.ReadListFromJSON<WeaponData>());   
         CreateWeaponDataArea();
     }
 
@@ -103,12 +103,17 @@ public class WeaponDataEditor : EditorWindow
         {
             if (showWeaponInfo)
             {
-                weapons[i].weaponType = (GunWeaponType)EditorGUILayout.EnumPopup("武器類型", weapons[i].weaponType);
-                weapons[i].damage = EditorGUILayout.FloatField("攻擊力", weapons[i].damage);
-                weapons[i].attackRate = EditorGUILayout.FloatField("每秒攻擊次數", weapons[i].attackRate);
-                weapons[i].maxBulletCount = EditorGUILayout.IntField("最大裝填數量", weapons[i].maxBulletCount);
-                weapons[i].shootingDistance = EditorGUILayout.IntField("有效射擊距離", weapons[i].shootingDistance);
+                weapons[i].weaponType = (GunWeaponType)EditorGUILayout.EnumPopup(HeaderString.h_WeaponType, weapons[i].weaponType);
+                weapons[i].damage = EditorGUILayout.FloatField(HeaderString.h_Damage, weapons[i].damage);
+                weapons[i].attackRate = EditorGUILayout.FloatField(HeaderString.h_AttackRate, weapons[i].attackRate);
+                weapons[i].maxBulletCount = EditorGUILayout.IntField(HeaderString.h_MaxBulletCount, weapons[i].maxBulletCount);
+                weapons[i].shootingDistance = EditorGUILayout.FloatField(HeaderString.h_ShootingDistance, weapons[i].shootingDistance);
                 weapons[i].dataIndex = i;
+
+                if(weapons[i].weaponType == GunWeaponType.ShotGun)
+                {
+                    weapons[i].scatterCount = EditorGUILayout.IntField(HeaderString.h_ScatterCount, weapons[i].scatterCount);
+                }
 
                 if (GUILayout.Button("移除武器"))
                 {
@@ -126,19 +131,19 @@ public class WeaponDataEditor : EditorWindow
 
    
 
-    private List<WeaponInfo> CreateWeaponData()
+    private List<WeaponData> CreateWeaponData()
     {
         DirectoryInfo directoryInfo = new DirectoryInfo(Application.dataPath);
         var weaponsDataPath = Path.Combine(directoryInfo.Parent.FullName, dataPath);
 
         if (File.Exists(weaponsDataPath) == false)
         {
-            var asset = CreateInstance<WeaponEditorData>();
+            var asset = CreateInstance<CreateWeaponData>();
             AssetDatabase.CreateAsset(asset, dataPath);
         }
 
-        var cacheEditorData = AssetDatabase.LoadAssetAtPath<WeaponEditorData>(dataPath);       
+        var cacheEditorData = AssetDatabase.LoadAssetAtPath<CreateWeaponData>(dataPath);       
         
-        return cacheEditorData.weapons;
+        return cacheEditorData.WeaponDatas;
     }
 }

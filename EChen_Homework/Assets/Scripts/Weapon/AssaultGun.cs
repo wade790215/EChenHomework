@@ -14,7 +14,7 @@ public class AssaultGun : WeaponComponent
 
         rayAttack.shottingMode = ShottingMode.TripleShot;
 
-        attackModule.Init(rayAttack,weaponData);
+        attackModule.Init(rayAttack,weaponData,firePoint);
         reloadModule.Init(fullReload,weaponData);
 
         moduleController.AddModule(typeof(AttackModule), attackModule);

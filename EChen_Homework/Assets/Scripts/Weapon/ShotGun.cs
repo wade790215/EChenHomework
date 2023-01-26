@@ -9,10 +9,10 @@ public class ShotGun : WeaponComponent
         ModuleController moduleController = new ModuleController();
         var attackModule = new AttackModule();
         var reloadModule = new ReloadModule();
-        var sphereAttack = new SphereAttack();
+        var sphereAttack = new RayAttack();
         var eachReload = new EachFilingReload();
 
-        attackModule.Init(sphereAttack,weaponData);
+        attackModule.Init(sphereAttack,weaponData,firePoint);
         reloadModule.Init(eachReload, weaponData);       
 
         moduleController.AddModule(typeof(AttackModule), attackModule);

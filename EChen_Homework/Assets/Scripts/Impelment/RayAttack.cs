@@ -15,11 +15,11 @@ public class RayAttack : AttackBase
         {
             weaponData.currentBulletCount--;
             DrawAttack();
-            Debug.Log($"{weaponData.weaponName} + Attack");
+            Debug.Log($"{weaponData.weaponType} + Attack");
         }
         else
         {
-            Debug.Log($"{weaponData.weaponName} + NeedReload");
+            Debug.Log($"{weaponData.weaponType} + NeedReload");
         }      
 
         lastAttackTime = Time.time;
@@ -34,25 +34,24 @@ public class RayAttack : AttackBase
     {
         for (int i = 0; i < weaponData.scatterCount; i++)
         {
-            var direction = weaponData.firePoint.forward;
+            var direction = firePoint.forward;
             var spread = Vector3.zero;
             var vMax = Tool.Angle2Value(Vector3.up, weaponData.verticalMaxAngle);
             var vMin = Tool.Angle2Value(Vector3.up, weaponData.verticalMinAngle);
             var hMax = Tool.Angle2Value(Vector3.right, weaponData.horiziontalMaxAngle);
             var hMin = Tool.Angle2Value(Vector3.right, weaponData.horiziontalMinAngle);
 
-            spread += weaponData.firePoint.up * Random.Range(vMin, vMax);
-            spread += weaponData.firePoint.right * Random.Range(hMin, hMax);
+            spread += firePoint.up * Random.Range(vMin, vMax);
+            spread += firePoint.right * Random.Range(hMin, hMax);
             direction += spread;
 
-            if (Physics.Raycast(weaponData.firePoint.position, direction, out RaycastHit hit, weaponData.shootingDistance))
+            if (Physics.Raycast(firePoint.position, direction, out RaycastHit hit, weaponData.shootingDistance))
             {
-                Debug.DrawLine(weaponData.firePoint.position, hit.point, Color.green, 5f);
+                Debug.DrawLine(firePoint.position, hit.point, Color.green, 5f);
             }
             else
             {
-                Debug.DrawLine(weaponData.firePoint.position,
-                    weaponData.firePoint.position + direction * weaponData.shootingDistance,
+                Debug.DrawLine(firePoint.position,firePoint.position + direction * weaponData.shootingDistance,
                     Color.red, 5f);
             }
         }

@@ -7,13 +7,13 @@ public class GameMain : MonoBehaviour
     private WeaponFactory weaponFactory;
     private WeaponController[] weaponController;
     private FileHandler fileHandler;
-    private List<WeaponInfo> weapons;   
+    private List<WeaponData> weapons;
 
     private void Awake()
     {
         fileHandler = new FileHandler();
         weaponFactory = new WeaponFactory();
-        weapons = fileHandler.ReadListFromJSON<WeaponInfo>();
+        weapons = fileHandler.ReadListFromJSON<WeaponData>();
     }
 
     private void Start()
@@ -40,16 +40,24 @@ public class GameMain : MonoBehaviour
             switch (weapon.weaponType)
             {
                 case GunWeaponType.Pistol:
-                    weaponFactory.AddProductionLine(GunWeaponType.Pistol, new Pistol());
+                    var pistol = new Pistol();
+                    pistol.SetWeaponData(weapon);
+                    weaponFactory.AddProductionLine(GunWeaponType.Pistol, pistol);
                     break;
                 case GunWeaponType.MachineGun:
-                    weaponFactory.AddProductionLine(GunWeaponType.MachineGun, new MachineGun());
+                    var machineGun = new MachineGun();
+                    machineGun.SetWeaponData(weapon);
+                    weaponFactory.AddProductionLine(GunWeaponType.MachineGun, machineGun);
                     break;
                 case GunWeaponType.ShotGun:
-                    weaponFactory.AddProductionLine(GunWeaponType.ShotGun, new ShotGun());
+                    var shotGun = new ShotGun();
+                    shotGun.SetWeaponData(weapon);
+                    weaponFactory.AddProductionLine(GunWeaponType.ShotGun, shotGun);
                     break;
                 case GunWeaponType.AssaultGun:
-                    weaponFactory.AddProductionLine(GunWeaponType.AssaultGun, new AssaultGun());
+                    var assaultGun = new AssaultGun();
+                    assaultGun.SetWeaponData(weapon);
+                    weaponFactory.AddProductionLine(GunWeaponType.AssaultGun, assaultGun);
                     break;
             }
         }

@@ -25,6 +25,7 @@ public class WeaponDataEditor : EditorWindow
     {
         fileHandler = new FileHandler();
         weapons = CreateWeaponData();
+        showWeaponInfo = true;
     }
 
     private void OnDisable()
@@ -50,6 +51,7 @@ public class WeaponDataEditor : EditorWindow
             if (GUILayout.Button("更新列表", GUILayout.Height(50)))
             {
                 RefreshWeaponList();
+                showWeaponInfo = true;
             }
 
             if (GUILayout.Button("復原設定檔資料", GUILayout.Height(50)))
@@ -58,6 +60,7 @@ public class WeaponDataEditor : EditorWindow
                 if (result == (int)MessageResult.OK)
                 {
                     RecoverSettingData();
+                    showWeaponInfo = true;
                 }
                 else
                 {
@@ -104,6 +107,9 @@ public class WeaponDataEditor : EditorWindow
             if (showWeaponInfo)
             {
                 weapons[i].weaponType = (GunWeaponType)EditorGUILayout.EnumPopup(HeaderString.h_WeaponType, weapons[i].weaponType);
+                weapons[i].detectingType = (DetectingType)EditorGUILayout.EnumPopup(HeaderString.h_DetectingType, weapons[i].detectingType);
+                weapons[i].reloadingType = (ReloadingType)EditorGUILayout.EnumPopup(HeaderString.h_ReloadingType, weapons[i].reloadingType);
+                weapons[i].shottingMode = (ShottingMode)EditorGUILayout.EnumPopup(HeaderString.h_ShottingMode, weapons[i].shottingMode);
                 weapons[i].damage = EditorGUILayout.FloatField(HeaderString.h_Damage, weapons[i].damage);
                 weapons[i].attackRate = EditorGUILayout.FloatField(HeaderString.h_AttackRate, weapons[i].attackRate);
                 weapons[i].maxBulletCount = EditorGUILayout.IntField(HeaderString.h_MaxBulletCount, weapons[i].maxBulletCount);
@@ -127,9 +133,7 @@ public class WeaponDataEditor : EditorWindow
             }
         }
         GUILayout.Space(10);
-    }
-
-   
+    }   
 
     private List<WeaponData> CreateWeaponData()
     {

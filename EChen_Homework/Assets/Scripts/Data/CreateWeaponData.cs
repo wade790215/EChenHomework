@@ -2,12 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "WeaponData", menuName = "CreateModelData/CreateWeaponData")]
-public class CreateWeaponData : ScriptableObject
-{
-    public List<WeaponData> WeaponDatas = new List<WeaponData>();   
-}
-
 public enum GunWeaponType
 {
     Pistol,
@@ -16,11 +10,46 @@ public enum GunWeaponType
     AssaultGun
 }
 
+public enum ReloadingType
+{
+    EachFiling,
+    Full,    
+}
+
+public enum DetectingType
+{
+    Ray,
+    Sphere,    
+}
+
+public enum ShottingMode
+{
+    SingleShot,
+    AutoShot,
+    TripleShot
+}
+
+[CreateAssetMenu(fileName = "WeaponData", menuName = "CreateModelData/CreateWeaponData")]
+public class CreateWeaponData : ScriptableObject
+{
+    public List<WeaponData> WeaponDatas = new List<WeaponData>();   
+}
+
+
 [Serializable]
 public class WeaponData 
 {
     [Header(HeaderString.h_WeaponType)]
     public GunWeaponType weaponType;
+
+    [Header(HeaderString.h_DetectingType)]
+    public DetectingType detectingType;
+
+    [Header(HeaderString.h_ReloadingType)]
+    public ReloadingType reloadingType;
+
+    [Header(HeaderString.h_ShottingMode)]
+    public ShottingMode shottingMode;
 
     [Header(HeaderString.h_Owner)]
     public string owner;

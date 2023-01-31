@@ -5,6 +5,9 @@ using UnityEngine;
 public class HeaderString 
 {
     public const string h_WeaponType = "武器類型";
+    public const string h_ReloadingType = "裝填方式";
+    public const string h_DetectingType = "攻擊偵測方式";
+    public const string h_ShottingMode = "射擊模式";    
     public const string h_Owner = "持有者";
     public const string h_Damage = "攻擊力";
     public const string h_Durability = "耐久度";

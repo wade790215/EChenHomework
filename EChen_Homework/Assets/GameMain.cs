@@ -33,6 +33,17 @@ public class GameMain : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        foreach (var controller in weaponController)
+        {
+            controller.OnUpdate();
+        }
+    }
+
+    /// <summary>
+    /// 只負責製造產品線，實際組裝功能由Weaponcontroller實作並生產
+    /// </summary>
     private void CreateProductionLine()
     {
         foreach (var weapon in weapons)
@@ -61,13 +72,5 @@ public class GameMain : MonoBehaviour
                     break;
             }
         }
-    }
-
-    private void Update()
-    {
-        foreach (var controller in weaponController)
-        {
-            controller.OnUpdate();
-        }
-    }
+    }  
 }

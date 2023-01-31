@@ -2,6 +2,9 @@
     "Items": [
         {
             "weaponType": 0,
+            "detectingType": 0,
+            "reloadingType": 1,
+            "shottingMode": 0,
             "owner": "",
             "damage": 6.0,
             "durability": 100.0,
@@ -18,6 +21,9 @@
         },
         {
             "weaponType": 3,
+            "detectingType": 0,
+            "reloadingType": 1,
+            "shottingMode": 1,
             "owner": "",
             "damage": 3.0,
             "durability": 100.0,
@@ -34,6 +40,9 @@
         },
         {
             "weaponType": 2,
+            "detectingType": 1,
+            "reloadingType": 0,
+            "shottingMode": 2,
             "owner": "",
             "damage": 10.0,
             "durability": 100.0,

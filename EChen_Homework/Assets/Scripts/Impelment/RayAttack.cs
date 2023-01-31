@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class RayAttack : AttackBase
 {
-    public float lastAttackTime = 0f;
-    
+    public RayAttack(ShottingMode shottingMode) : base(shottingMode)
+    {
+    }
+
+    public RayAttack()
+    {
+    }  
+
     public override void Attack()
     {
-        if (!AllowAttack())
+        if (!IsAttackable())
             return;
 
         if (weaponData.currentBulletCount > 0)
@@ -24,12 +30,7 @@ public class RayAttack : AttackBase
 
         lastAttackTime = Time.time;
     }
-
-    public bool AllowAttack()
-    {
-        return Time.time - lastAttackTime > 1 / weaponData.attackRate;
-    }
-
+   
     public void DrawAttack()
     {
         for (int i = 0; i < weaponData.scatterCount; i++)

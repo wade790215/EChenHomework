@@ -11,21 +11,22 @@ public class WeaponController : MonoBehaviour
     public Transform firePoint;   
     private WeaponFactory weaponFactory;
     private WeaponComponent myWeapon;
-   
+    private ModuleController moduleController;
+
     public void OnStart()
     {       
         if(weaponFactory.TryGetWeaponComponent(weaponType, out WeaponComponent myWeapon))
         {
             this.myWeapon = myWeapon;
-            this.myWeapon.SetFirePoint(firePoint);   
+            this.myWeapon.SetFirePoint(firePoint);
+            moduleController = this.myWeapon.AssemblyComponentFromSetting();
         }     
     }
 
     public void OnUpdate()
     {
         if (myWeapon != null)
-        {
-            ModuleController moduleController = myWeapon.AssemblyComponent();
+        {            
             if (moduleController != null)
             {
                 if (moduleController.TryGetModuleBase(typeof(AttackModule),out AttackModule attackModule))

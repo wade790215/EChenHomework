@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
 public class WeaponController : MonoBehaviour
 {
     public GunWeaponType weaponType;    
@@ -20,7 +19,11 @@ public class WeaponController : MonoBehaviour
             this.myWeapon = myWeapon;
             this.myWeapon.SetFirePoint(firePoint);
             moduleController = this.myWeapon.AssemblyComponentFromSetting();
-        }     
+        }
+        else
+        {
+            Debug.Log($"找不到武器{weaponType}，請檢查武器工廠是否有製造該武器");
+        }
     }
 
     public void OnUpdate()
@@ -46,5 +49,4 @@ public class WeaponController : MonoBehaviour
     {
         this.weaponFactory = weaponFactory;
     }
-
 }

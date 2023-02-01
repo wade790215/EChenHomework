@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using UnityEditor.Build.Pipeline.Tasks;
 using UnityEngine;
 
@@ -25,6 +28,7 @@ public class WeaponComponent:IGetWeaponData
         EachFilingReload eachFilingReload = default;
         FullReload fullReload = default;
         
+        //TODO Switch改用反射來做
         switch (weaponData.detectingType)
         {
             case DetectingType.Ray:
@@ -65,3 +69,63 @@ public class WeaponComponent:IGetWeaponData
         this.firePoint = firePoint;
     }
 }
+
+
+
+//[System.AttributeUsage(System.AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
+//sealed class NameAttribute : System.Attribute
+//{
+//    public string Name { get; private set; }
+
+//    // See the attribute guidelines at 
+//    //  http://go.microsoft.com/fwlink/?LinkId=85236
+//    readonly string positionalString;
+
+//    // This is a positional argument
+//    public NameAttribute(string name)
+//    {
+//        this.Name = name;
+//    }
+//}
+
+//public class NameHandler
+//{
+//    public List<string> GetAllNameClass()
+//    {
+//        var allType = System.Reflection.Assembly.GetExecutingAssembly().GetTypes();
+//        foreach (var type in allType)
+//        {
+//            var nameAttributes = type.GetCustomAttributes<NameAttribute>(false);
+//            if (nameAttributes.Count() > 0)
+//            {
+//                //add all class name to list
+//                List<string> names = new List<string>();
+
+//                //foreach nameAttribute
+//                foreach (var name in nameAttributes)
+//                {
+//                    //add
+//                    names.Add(name.Name);
+//                }
+//            }
+//        }
+//    }
+
+//    public List<(string, A)> GetAllOptions()
+//    {
+//        List<(string, A)> options = new List<(string, A)>();
+
+//        options.Add((typeof(A).Name, new A()));
+//    }
+//}
+
+//[Name("連續射擊")]
+//public class A
+//{
+    
+//}
+
+//public interface ICreater
+//{
+//    A Create(object[] args);
+//}

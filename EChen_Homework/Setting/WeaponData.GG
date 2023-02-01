@@ -37,25 +37,6 @@
             "horiziontalMinAngle": 0.0,
             "shootingDistance": 10.0,
             "dataIndex": 1
-        },
-        {
-            "weaponType": 2,
-            "detectingType": 1,
-            "reloadingType": 0,
-            "shottingMode": 2,
-            "owner": "",
-            "damage": 10.0,
-            "durability": 100.0,
-            "attackRate": 1.0,
-            "scatterCount": 10,
-            "currentBulletCount": 10,
-            "maxBulletCount": 8,
-            "verticalMaxAngle": 10.0,
-            "verticalMinAngle": 0.0,
-            "horiziontalMaxAngle": 10.0,
-            "horiziontalMinAngle": 0.0,
-            "shootingDistance": 4.0,
-            "dataIndex": 2
         }
     ]
 }

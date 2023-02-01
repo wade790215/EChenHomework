@@ -28,6 +28,12 @@ public class WeaponDataEditor : EditorWindow
         showWeaponInfo = true;
     }
 
+    [InitializeOnLoadMethod]
+    public void Reload()
+    {
+        
+    }
+
     private void OnDisable()
     {
 
@@ -123,6 +129,11 @@ public class WeaponDataEditor : EditorWindow
 
                 if (GUILayout.Button("移除武器"))
                 {
+                    //if (EditorUtility.DisplayDialog("警告", "確定要移除武器嗎?", "確定", "取消"))
+                    //{
+                    //    weapons.RemoveAt(i);                        
+                    //}
+
                     var result = MessageBoxController.ShowMessageBox("確定要移除!!", "警告", MessageBoxRetrunNumber.OKNo);
                     if (result == (int)MessageResult.OK)
                     {
